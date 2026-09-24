@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seoul &amp; Tokyo — Nov 23 – Dec 5, 2026</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --line: #e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px 64px; }
+  header.hero {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: #fff;
+    border-radius: 16px;
+    padding: 36px 28px;
+    margin-bottom: 28px;
+  }
+  header.hero h1 { margin: 0 0 6px; font-size: 2rem; }
+  header.hero p { margin: 4px 0; opacity: .92; }
+  #countdown { font-size: 1.1rem; font-weight: 600; margin-top: 12px; }
+  h2 { margin: 32px 0 12px; font-size: 1.35rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .flight-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+  .flight-head .route { font-size: 1.15rem; font-weight: 700; }
+  .flight-head .date { color: var(--muted); font-weight: 600; }
+  .flight-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 10px; color: var(--muted); font-size: .95rem; }
+  .flight-meta b { color: var(--ink); font-weight: 600; }
+  .tag {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 999px;
+    padding: 2px 12px;
+    font-size: .8rem;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+  .day { display: flex; gap: 14px; align-items: flex-start; }
+  .day .dnum {
+    flex: 0 0 64px;
+    text-align: center;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 4px;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  .day .dnum b { display: block; font-size: 1.2rem; color: var(--ink); }
+  .day .plan { flex: 1; }
+  .day .plan .city { font-weight: 700; }
+  .day .plan .note { color: var(--muted); font-size: .95rem; }
+  .tips li { margin-bottom: 8px; }
+  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Seoul &amp; Tokyo</h1>
+    <p>November 23 – December 5, 2026 · 13 days · 1 traveler · Economy</p>
+    <p>Total: <b>$1,269</b> (booked via Chase Travel)</p>
+    <div id="countdown">Loading countdown…</div>
+  </header>
+
+  <h2>✈️ Flights</h2>
+
+  <div class="card">
+    <div class="flight-head">
+      <span class="route">New York (JFK) → Seoul (ICN)</span>
+      <span class="date">Mon, Nov 23</span>
+    </div>
+    <div class="flight-meta">
+      <span><b>Asiana Airlines</b> · Non-stop</span>
+      <span>Dep <b>12:30 AM</b> → Arr <b>6:10 AM</b> (+1 day)</span>
+      <span>Duration <b>15h 40m</b></span>
+    </div>
+    <span class="tag">⚠️ Departs the night of Sun, Nov 22</span>
+  </div>
+
+  <div class="card">
+    <div class="flight-head">
+      <span class="route">Seoul (ICN) → Tokyo (HND)</span>
+      <span class="date">Sat, Nov 28</span>
+    </div>
+    <div class="flight-meta">
+      <span><b>Korean Air</b> · Non-stop</span>
+      <span>Dep <b>8:40 PM</b> → Arr <b>10:50 PM</b></span>
+      <span>Duration <b>2h 10m</b></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="flight-head">
+      <span class="route">Tokyo (HND) → New York (JFK)</span>
+      <span class="date">Sat, Dec 5</span>
+    </div>
+    <div class="flight-meta">
+      <span><b>Asiana Airlines</b> · 1 stop (ICN)</span>
+      <span>Dep <b>1:30 AM</b> → Arr <b>9:00 AM</b></span>
+      <span>Duration <b>21h 30m</b></span>
+    </div>
+  </div>
+
+  <h2>🗓️ Day by day</h2>
+  <div id="days"></div>
+
+  <h2>💡 Tips</h2>
+  <div class="card">
+    <ul class="tips">
+      <li>The outbound flight leaves at 12:30 AM Monday — be at JFK on <b>Sunday night, Nov 22</b>.</li>
+      <li>Chase points were showing 126,813 pts (1¢/pt). With the 1.25x portal boost it should be ~101k points — check the points price in your cart before paying.</li>
+      <li>The return leaves Haneda at 1:30 AM with a stop in Seoul — an early start and a long travel day.</li>
+    </ul>
+  </div>
+
+  <footer>Trip itinerary · edit this page to add plans, hotels, and notes</footer>
+</div>
+
+<script>
+  // Countdown to departure (Nov 23, 2026, 00:30 ET)
+  const depart = new Date("2026-11-23T00:30:00-05:00");
+  function tick() {
+    const now = new Date();
+    const ms = depart - now;
+    const el = document.getElementById("countdown");
+    if (ms <= 0) { el.textContent = "✈️ Wheels up — have a great trip!"; return; }
+    const d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4);
+    el.textContent = `⏳ ${d} days, ${h}h ${m}m until departure`;
+  }
+  tick(); setInterval(tick, 60000);
+
+  // Day-by-day skeleton: travel days pre-filled, rest open for plans
+  const days = [
+    ["Mon", "23", "Nov", "Seoul", "✈️ Fly JFK → ICN (arrives Tue 6:10 AM). Settle in."],
+    ["Tue", "24", "Nov", "Seoul", ""],
+    ["Wed", "25", "Nov", "Seoul", ""],
+    ["Thu", "26", "Nov", "Seoul", ""],
+    ["Fri", "27", "Nov", "Seoul", ""],
+    ["Sat", "28", "Nov", "Tokyo", "✈️ Fly ICN → HND (8:40 PM → 10:50 PM)."],
+    ["Sun", "29", "Nov", "Tokyo", ""],
+    ["Mon", "30", "Nov", "Tokyo", ""],
+    ["Tue", "1", "Dec", "Tokyo", ""],
+    ["Wed", "2", "Dec", "Tokyo", ""],
+    ["Thu", "3", "Dec", "Tokyo", ""],
+    ["Fri", "4", "Dec", "Tokyo", "Last night — pack for the 1:30 AM flight."],
+    ["Sat", "5", "Dec", "Home", "✈️ Fly HND → JFK via ICN (arrives 9:00 AM)."],
+  ];
+  const host = document.getElementById("days");
+  days.forEach(([wd, num, mo, city, note]) => {
+    const div = document.createElement("div");
+    div.className = "card day";
+    div.innerHTML = `
+      <div class="dnum">${wd}<b>${num}</b>${mo}</div>
+      <div class="plan">
+        <div class="city">${city}</div>
+        <div class="note">${note || "— add plans —"}</div>
+      </div>`;
+    host.appendChild(div);
+  });
+</script>
+</body>
+</html>
