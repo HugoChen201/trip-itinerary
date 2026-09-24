@@ -123,10 +123,13 @@
   .wx-upd { font-size: .7rem; color: var(--muted); font-weight: 600; }
   .wx-now { margin: 6px 0 2px; }
   .wx-temp { font-size: 2rem; font-weight: 800; }
-  .wx-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 10px; }
-  .wx-day { text-align: center; font-size: .68rem; color: var(--muted); background: var(--bg); border-radius: 8px; padding: 6px 2px; }
-  .wx-day b { display: block; font-size: .95rem; }
-  .wx-day .hi { color: var(--ink); font-weight: 700; }
+  .wx-days { display: flex; flex-direction: column; gap: 3px; margin-top: 10px; }
+  .wx-row { display: flex; align-items: center; gap: 10px; background: var(--bg); border-radius: 8px; padding: 5px 12px; font-size: .85rem; }
+  .wx-row .wx-d { color: var(--muted); font-weight: 600; flex: 1; white-space: nowrap; }
+  .wx-row .wx-d i { font-style: normal; font-weight: 400; opacity: .7; }
+  .wx-row b { font-size: 1.05rem; }
+  .wx-row .wx-t { color: var(--muted); margin-left: auto; white-space: nowrap; }
+  .wx-row .hi { color: var(--ink); font-weight: 700; }
   .wx-err { color: var(--muted); font-size: .9rem; margin-top: 6px; }
   .wx-note { font-size: .75rem; color: var(--muted); text-align: center; }
 
@@ -424,7 +427,7 @@
         const week = j.daily.time.slice(0, 7).map(t => {
           const [Y, M, D] = t.split("-").map(Number);
           const f = c.fc[t];
-          return `<div class="wx-day"><span>${WDAYS[new Date(Y, M - 1, D).getDay()]}</span><b>${wmoji(f.code)}</b><span class="hi">${f.hi}°</span>/${f.lo}°</div>`;
+          return `<div class="wx-row"><span class="wx-d">${WDAYS[new Date(Y, M - 1, D).getDay()]} <i>${M}/${D}</i></span><b>${wmoji(f.code)}</b><span class="wx-t"><span class="hi">${f.hi}°</span>/${f.lo}°</span></div>`;
         }).join("");
         const upd = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
         el.innerHTML = `<div class="wx-head"><b>${c.name}</b><span class="wx-upd">updated ${upd}</span></div>
