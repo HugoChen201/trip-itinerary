@@ -111,6 +111,45 @@
   .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 6px; vertical-align: baseline; }
 
   .tips li { margin-bottom: 8px; }
+
+  /* Itinerary layout + weather sidebar */
+  .itin-layout { display: grid; gap: 20px; }
+  @media (min-width: 880px) {
+    .itin-layout { grid-template-columns: 1fr 290px; align-items: start; }
+    .weather-side { position: sticky; top: 16px; }
+  }
+  .weather-side h2 { margin-top: 0; }
+  .wx-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 1rem; }
+  .wx-upd { font-size: .7rem; color: var(--muted); font-weight: 600; }
+  .wx-now { margin: 6px 0 2px; }
+  .wx-temp { font-size: 2rem; font-weight: 800; }
+  .wx-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 10px; }
+  .wx-day { text-align: center; font-size: .68rem; color: var(--muted); background: var(--bg); border-radius: 8px; padding: 6px 2px; }
+  .wx-day b { display: block; font-size: .95rem; }
+  .wx-day .hi { color: var(--ink); font-weight: 700; }
+  .wx-err { color: var(--muted); font-size: .9rem; margin-top: 6px; }
+  .wx-note { font-size: .75rem; color: var(--muted); text-align: center; }
+
+  /* Calendar weather badges */
+  .wx-badge { display: block; font-size: .62rem; font-weight: 700; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+  .wx-badge i { font-style: normal; font-weight: 400; opacity: .75; }
+
+  /* Map links on day cards */
+  .mapline { margin-top: 8px; font-size: .9rem; }
+  .mapline a { color: var(--accent-dark); font-weight: 700; text-decoration: none; }
+  .mapline a:hover { text-decoration: underline; }
+
+  /* Recommendations */
+  .rec-city { font-size: 1.1rem; font-weight: 800; margin: 22px 0 4px; }
+  .rec-city:first-of-type { margin-top: 4px; }
+  .rec-when { color: var(--muted); font-size: .85rem; font-weight: 600; }
+  .rec { display: flex; gap: 12px; align-items: flex-start; }
+  .rec .emoji { font-size: 1.4rem; line-height: 1.4; }
+  .rec b { display: block; }
+  .rec p { margin: 4px 0 0; color: var(--muted); font-size: .92rem; }
+  .rec a { color: var(--accent-dark); font-weight: 600; }
+  .dates-tag { font-size: .75rem; font-weight: 700; color: var(--accent-dark); background: var(--accent-soft); border-radius: 999px; padding: 1px 10px; margin-left: 8px; white-space: nowrap; }
+
   footer { margin-top: 40px; color: var(--muted); font-size: .85rem; text-align: center; }
 </style>
 </head>
@@ -127,20 +166,31 @@
     <button class="tab active" data-tab="itinerary">Itinerary</button>
     <button class="tab" data-tab="calendar">Calendar</button>
     <button class="tab" data-tab="flights">Flights</button>
+    <button class="tab" data-tab="recs">✨ Recommendations</button>
     <button class="tab" data-tab="sheet">Spreadsheet</button>
   </nav>
 
   <!-- ITINERARY -->
   <section class="tabpane active" id="pane-itinerary">
     <h2>Day by day</h2>
-    <div id="days"></div>
-    <h2>💡 Tips</h2>
-    <div class="card">
-      <ul class="tips">
-        <li>The outbound flight leaves at 12:30 AM Monday — be at JFK on <b>Sunday night, Nov 22</b>.</li>
-        <li>Chase points were showing 126,813 pts (1¢/pt). With the 1.25x portal boost it should be ~101k points — check the points price in your cart before paying.</li>
-        <li>The return leaves Haneda at 1:30 AM with a stop in Seoul — an early start and a long travel day.</li>
-      </ul>
+    <div class="itin-layout">
+      <div class="itin-main">
+        <div id="days"></div>
+        <h2>💡 Tips</h2>
+        <div class="card">
+          <ul class="tips">
+            <li>The outbound flight leaves at 12:30 AM Monday — be at JFK on <b>Sunday night, Nov 22</b>.</li>
+            <li>Chase points were showing 126,813 pts (1¢/pt). With the 1.25x portal boost it should be ~101k points — check the points price in your cart before paying.</li>
+            <li>The return leaves Haneda at 1:30 AM with a stop in Seoul — an early start and a long travel day.</li>
+          </ul>
+        </div>
+      </div>
+      <aside class="weather-side">
+        <h2>🌤️ Weather</h2>
+        <div class="card wx" id="wx-seoul"><b>Seoul</b><div class="wx-err">Loading…</div></div>
+        <div class="card wx" id="wx-tokyo"><b>Tokyo</b><div class="wx-err">Loading…</div></div>
+        <div class="wx-note">Live forecast · refreshes every visit</div>
+      </aside>
     </div>
   </section>
 
@@ -193,6 +243,56 @@
     </div>
   </section>
 
+  <!-- RECOMMENDATIONS -->
+  <section class="tabpane" id="pane-recs">
+    <h2>✨ Muse's recommendations</h2>
+    <p style="color:var(--muted);margin-top:-6px">Picks timed to your dates — late November in Seoul, early December in Tokyo.</p>
+
+    <div class="rec-city">🇰🇷 Seoul <span class="rec-when">· Nov 23–28</span></div>
+    <div class="card rec">
+      <div class="emoji">🎭</div>
+      <div><b>2026 Seoul Autumn Festa<span class="dates-tag">Sep 18 – Nov 29</span></b>
+      <p>A citywide performing-arts festival — dance, theater, music and traditional arts across Seoul under the theme "Seoul's Autumn: The City Becomes Art." It overlaps your entire Seoul stay. <a href="https://www.travelmole.com/news/365-day-festival-destination-seoul/" target="_blank" rel="noopener">Details ↗</a></p></div>
+    </div>
+    <div class="card rec">
+      <div class="emoji">🍂</div>
+      <div><b>Late autumn foliage</b>
+      <p>You'll catch the tail end of fall colors — Namsan Park, Seoul Forest and the palace grounds (Gyeongbokgung, Changdeokgung) are the classic spots.</p></div>
+    </div>
+    <div class="card rec">
+      <div class="emoji">🍢</div>
+      <div><b>Eat: Gwangjang Market &amp; Myeongdong</b>
+      <p>Gwangjang for bindaetteok and knife-cut noodles, Myeongdong for street-food grazing after dark. Cold-weather food hits different.</p></div>
+    </div>
+    <div class="card rec">
+      <div class="emoji">💡</div>
+      <div><b>Just missed: Seoul Winter Festival</b>
+      <p>The big winter light festival (Hangang River, Gwanghwamun, DDP) starts Dec 4 — a few days after you leave for Tokyo. Save it for a future trip.</p></div>
+    </div>
+
+    <div class="rec-city">🇯🇵 Tokyo <span class="rec-when">· Nov 28 – Dec 5</span></div>
+    <div class="card rec">
+      <div class="emoji">🍁</div>
+      <div><b>Rikugien Garden night illuminations<span class="dates-tag">Nov 25 – Dec 6</span></b>
+      <p>One of Tokyo's most beautiful Edo-period landscape gardens, open 6–8:30 PM for illuminated autumn foliage — right in the middle of your Tokyo days, easy JR Yamanote access. <a href="https://soranews24.com/2026/09/09/tokyos-rikugien-garden-announces-nighttime-foliage-illumination-event-ahead-of-autumn/" target="_blank" rel="noopener">Details ↗</a></p></div>
+    </div>
+    <div class="card rec">
+      <div class="emoji">✨</div>
+      <div><b>Winter illuminations</b>
+      <p>Peak season while you're there: Roppongi Hills (Nov 4–Dec 25), Roppongi Midtown (early Nov–Dec 25), Shibuya Blue Cave (early Dec–Dec 25) and Marunouchi near Tokyo Station. <a href="https://www.kyuhoshi.com/winter-illumination-in-tokyo/" target="_blank" rel="noopener">Guide ↗</a></p></div>
+    </div>
+    <div class="card rec">
+      <div class="emoji">🎄</div>
+      <div><b>Christmas markets</b>
+      <p>Meiji Jingu Gaien market runs from Nov 21, and Yokohama Red Brick Warehouse from Nov 21 — glühwein and a good evening out. <a href="https://www.snowmonkeyresorts.com/news/tokyo-in-december/" target="_blank" rel="noopener">December guide ↗</a></p></div>
+    </div>
+    <div class="card rec">
+      <div class="emoji">⛩️</div>
+      <div><b>Day trip: Kamakura + Enoshima</b>
+      <p>Temples and shrines in Kamakura by day, Enoshima's seaside illuminations after dark — about an hour from central Tokyo.</p></div>
+    </div>
+  </section>
+
   <!-- SPREADSHEET -->
   <section class="tabpane" id="pane-sheet">
     <h2>📊 Trip spreadsheet</h2>
@@ -237,24 +337,24 @@
   }
   tick(); setInterval(tick, 60000);
 
-  // Itinerary days
+  // Itinerary days (last field: Google Maps route link, "" = none yet)
   const days = [
-    ["Mon","23","Nov","Seoul","✈️ Fly JFK → ICN (arrives Tue 6:10 AM). Settle in.", true],
-    ["Tue","24","Nov","Seoul","", false],
-    ["Wed","25","Nov","Seoul","", false],
-    ["Thu","26","Nov","Seoul","", false],
-    ["Fri","27","Nov","Seoul","", false],
-    ["Sat","28","Nov","Tokyo","✈️ Fly ICN → HND (8:40 PM → 10:50 PM).", true],
-    ["Sun","29","Nov","Tokyo","", false],
-    ["Mon","30","Nov","Tokyo","", false],
-    ["Tue","1","Dec","Tokyo","", false],
-    ["Wed","2","Dec","Tokyo","", false],
-    ["Thu","3","Dec","Tokyo","", false],
-    ["Fri","4","Dec","Tokyo","Last night — pack for the 1:30 AM flight.", false],
-    ["Sat","5","Dec","Home","✈️ Fly HND → JFK via ICN (arrives 9:00 AM).", true],
+    ["Mon","23","Nov","Seoul","✈️ Fly JFK → ICN (arrives Tue 6:10 AM). Settle in.", true, ""],
+    ["Tue","24","Nov","Seoul","", false, ""],
+    ["Wed","25","Nov","Seoul","", false, ""],
+    ["Thu","26","Nov","Seoul","", false, ""],
+    ["Fri","27","Nov","Seoul","", false, ""],
+    ["Sat","28","Nov","Tokyo","✈️ Fly ICN → HND (8:40 PM → 10:50 PM).", true, ""],
+    ["Sun","29","Nov","Tokyo","", false, ""],
+    ["Mon","30","Nov","Tokyo","", false, ""],
+    ["Tue","1","Dec","Tokyo","", false, ""],
+    ["Wed","2","Dec","Tokyo","", false, ""],
+    ["Thu","3","Dec","Tokyo","", false, ""],
+    ["Fri","4","Dec","Tokyo","Last night — pack for the 1:30 AM flight.", false, ""],
+    ["Sat","5","Dec","Home","✈️ Fly HND → JFK via ICN (arrives 9:00 AM).", true, ""],
   ];
   const host = document.getElementById("days");
-  days.forEach(([wd, num, mo, city, note, isFlight], i) => {
+  days.forEach(([wd, num, mo, city, note, isFlight, map], i) => {
     const div = document.createElement("div");
     div.className = "card day";
     div.innerHTML = `
@@ -262,14 +362,15 @@
       <div class="plan">
         <div class="city">${city}${isFlight ? '<span class="pill">✈️ travel day</span>' : ''}</div>
         <div class="note">${note || "— add plans —"}</div>
+        ${map ? `<div class="mapline">🗺️ <a href="${map}" target="_blank" rel="noopener">Route map ↗</a></div>` : ""}
       </div>`;
     host.appendChild(div);
   });
 
   // Calendar view: Nov & Dec 2026, trip range Nov 23 – Dec 5 highlighted
   const tripStart = new Date(2026, 10, 23), tripEnd = new Date(2026, 11, 5);
-  const flightDays = ["2026-11-23", "2026-11-28", "2026-12-5"];
-  const key = d => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  const flightDays = ["2026-11-23", "2026-11-28", "2026-12-05"];
+  const key = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   function monthGrid(year, month, name) {
     const first = new Date(year, month, 1);
     let html = `<div class="month"><h3>${name} 2026</h3><div class="dow">` +
@@ -281,12 +382,73 @@
       let cls = "";
       if (flightDays.includes(k)) cls = "flight";
       else if (dt >= tripStart && dt <= tripEnd) cls = "trip";
-      html += `<span class="${cls}">${d}</span>`;
+      html += `<span class="${cls}" data-date="${k}">${d}</span>`;
     }
     return html + `</div></div>`;
   }
   document.getElementById("calendars").innerHTML =
     monthGrid(2026, 10, "November") + monthGrid(2026, 11, "December");
+
+  // Live weather (Open-Meteo, no key needed) — refreshes on every visit
+  const CITIES = {
+    seoul: { name: "Seoul", lat: 37.566, lon: 126.978, tz: "Asia/Seoul", el: "wx-seoul" },
+    tokyo: { name: "Tokyo", lat: 35.6762, lon: 139.6503, tz: "Asia/Tokyo", el: "wx-tokyo" },
+  };
+  function wmoji(code) {
+    if (code === 0) return "☀️";
+    if (code === 1) return "🌤️";
+    if (code === 2) return "⛅";
+    if (code === 3) return "☁️";
+    if (code === 45 || code === 48) return "🌫️";
+    if ([51, 53, 55, 56, 57].includes(code)) return "🌦️";
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "🌧️";
+    if ([71, 73, 75, 77, 85, 86].includes(code)) return "🌨️";
+    if ([95, 96, 99].includes(code)) return "⛈️";
+    return "🌡️";
+  }
+  const WDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const TYPICAL = { seoul: [8, -1], tokyo: [14, 6] }; // typical [hi, lo] °C for the trip dates
+  async function loadWeather() {
+    for (const ck of Object.keys(CITIES)) {
+      const c = CITIES[ck], el = document.getElementById(c.el);
+      try {
+        const u = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}` +
+          `&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min` +
+          `&timezone=${encodeURIComponent(c.tz)}&forecast_days=16`;
+        const j = await (await fetch(u)).json();
+        c.fc = {};
+        j.daily.time.forEach((t, i) => {
+          c.fc[t] = { code: j.daily.weather_code[i], hi: Math.round(j.daily.temperature_2m_max[i]), lo: Math.round(j.daily.temperature_2m_min[i]) };
+        });
+        const now = Math.round(j.current.temperature_2m);
+        const week = j.daily.time.slice(0, 7).map(t => {
+          const [Y, M, D] = t.split("-").map(Number);
+          const f = c.fc[t];
+          return `<div class="wx-day"><span>${WDAYS[new Date(Y, M - 1, D).getDay()]}</span><b>${wmoji(f.code)}</b><span class="hi">${f.hi}°</span>/${f.lo}°</div>`;
+        }).join("");
+        const upd = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+        el.innerHTML = `<div class="wx-head"><b>${c.name}</b><span class="wx-upd">updated ${upd}</span></div>
+          <div class="wx-now"><span class="wx-temp">${wmoji(j.current.weather_code)} ${now}°C</span></div>
+          <div class="wx-days">${week}</div>`;
+      } catch (e) {
+        el.innerHTML = `<div class="wx-head"><b>${c.name}</b></div><div class="wx-err">Couldn't load right now — check back later.</div>`;
+      }
+    }
+    paintCalendarWeather();
+  }
+  function paintCalendarWeather() {
+    document.querySelectorAll("#calendars .dates span[data-date]").forEach(sp => {
+      const ds = sp.dataset.date;
+      if (ds < "2026-11-23" || ds > "2026-12-05") return;
+      const ck = ds < "2026-11-28" ? "seoul" : "tokyo";
+      const c = CITIES[ck], f = c.fc && c.fc[ds];
+      const badge = f
+        ? `<span class="wx-badge">${wmoji(f.code)} ${f.hi}°/${f.lo}°</span>`
+        : `<span class="wx-badge">⛅ ${TYPICAL[ck][0]}°/${TYPICAL[ck][1]}° <i>typ.</i></span>`;
+      sp.insertAdjacentHTML("beforeend", badge);
+    });
+  }
+  loadWeather();
 </script>
 </body>
 </html>
