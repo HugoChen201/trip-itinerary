@@ -196,6 +196,17 @@
   .itinday li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
   .itinday li:last-child { border-bottom: none; }
   .itinday b { white-space: nowrap; }
+  .hotel-name { font-size: 1.05rem; font-weight: 700; }
+  .hsrc { font-size: .72rem; color: var(--muted); border: 1px solid var(--muted); border-radius: 4px; padding: 1px 6px; margin-left: 8px; vertical-align: 2px; }
+  .hotel .hmeta { color: var(--muted); font-size: .9rem; margin: 4px 0; }
+  .hotel .hprice { margin: 6px 0 2px; }
+  .hotel .hprice b { font-size: 1.15rem; }
+  .fine { font-size: .82rem; color: var(--muted); margin: 12px 0 0; }
+  .pack-item { display: flex; gap: 10px; align-items: flex-start; padding: 7px 2px; cursor: pointer; border-bottom: 1px solid var(--border); }
+  .pack-item:last-child { border-bottom: 0; }
+  .pack-item input { margin-top: 4px; transform: scale(1.3); accent-color: var(--accent); flex-shrink: 0; }
+  .pack-item input:checked + span { text-decoration: line-through; opacity: .55; }
+  .pack-item span span { color: var(--muted); font-size: .85rem; }
   .pack-cat { font-weight: 800; margin: 14px 0 6px; }
   .pack-cat:first-child { margin-top: 0; }
   .pack { list-style: none; margin: 0 0 4px; padding: 0; }
@@ -219,6 +230,7 @@
     <button class="tab active" data-tab="itinerary">🗓️ Itinerary</button>
     <button class="tab" data-tab="calendar">📅 Calendar</button>
     <button class="tab" data-tab="flights">✈️ Flights</button>
+    <button class="tab" data-tab="hotels">🏨 Hotels</button>
     <button class="tab" data-tab="recs">✨ Recommendations</button>
     <button class="tab" data-tab="guide">🗺️ Guide</button>
     <button class="tab" data-tab="budget">💰 Budget</button>
@@ -296,6 +308,79 @@
         <span>Dep <b>1:30 AM</b> → Arr <b>9:00 AM</b></span>
         <span>Duration <b>21h 30m</b></span>
       </div>
+    </div>
+  </section>
+
+  <section class="tabpane" id="pane-hotels">
+    <h2>🏨 Hotels</h2>
+    <p style="color:var(--muted);margin-top:-6px">Cheapest triple-room options for 3 adults sharing 1 room — prices were live on Sep 24, click through to confirm current rates for Nov 24–27 / Nov 27–Dec 5. Nothing is booked, and hotels stay out of the budget until you pick one.</p>
+
+    <div class="rec-city">🇰🇷 Seoul <span class="rec-when">· Nov 24–27 · 3 nights</span></div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.agoda.com/stay-everyday/hotel/all/seoul-kr.html?countryId=212&adults=3&children=0&rooms=1&checkIn=2026-11-24&currencyCode=USD&los=3" target="_blank" rel="noopener">Stay Everyday</a><span class="hsrc">Agoda</span>
+      <div class="hmeta">Guro, Seoul · Family Room — 1 single + 1 bunk bed (3 separate beds) · 7.5 Very Good · free cancellation</div>
+      <div class="hprice"><b>$32</b>/night · $96 total · <b>$32</b>/person <span class="fine">before taxes</span></div>
+      <p class="fine">Budget hostel run by a private host; bunk-bed setup.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.agoda.com/dongdaemun-guesthouse/hotel/seoul-kr.html?countryId=212&adults=3&children=0&rooms=1&checkIn=2026-11-24&currencyCode=USD&los=3" target="_blank" rel="noopener">Dongdaemun Guesthouse</a><span class="hsrc">Agoda</span>
+      <div class="hmeta">Shinseol-dong, Gangbuk — 80m to Sinseol-dong Station · Deluxe Family — 1 double + 1 bunk bed · 7.5 Very Good (479 reviews) · free cancellation</div>
+      <div class="hprice"><b>$38</b>/night · $114 total · <b>$38</b>/person <span class="fine">before taxes</span></div>
+      <p class="fine">Older building (cleanliness 6.7) but superb station access — location score 8.6.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.booking.com/hotel/kr/cozy-house-in-sindaebang.html?checkin=2026-11-24&checkout=2026-11-27&group_adults=3&no_rooms=1" target="_blank" rel="noopener">Cozy House in Sindaebang</a><span class="hsrc">Booking.com</span>
+      <div class="hmeta">Gwanak-gu, Seoul · Entire 2-bedroom apartment (431 ft²) — 3 full beds · 9.8 Exceptional</div>
+      <div class="hprice"><b>$44.80</b>/night · $134 total · <b>$45</b>/person</div>
+      <p class="fine">Whole apartment with 3 real beds; ~7 miles from downtown. New to Booking.com.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.booking.com/hotel/kr/blue-boat-hostel.html?checkin=2026-11-24&checkout=2026-11-27&group_adults=3&no_rooms=1" target="_blank" rel="noopener">Blue Boat Hostel Myeongdong</a><span class="hsrc">Booking.com</span>
+      <div class="hmeta">Myeongdong, Jung-gu · Basic Triple Room — 1 twin + 1 bunk bed · 8.2 Very Good (352 reviews) · free cancellation</div>
+      <div class="hprice"><b>$53.60</b>/night · $161 total · <b>$54</b>/person</div>
+      <p class="fine">Central Myeongdong location; private triple room in a hostel.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.booking.com/hotel/kr/apollo-guesthouse.html?checkin=2026-11-24&checkout=2026-11-27&group_adults=3&no_rooms=1" target="_blank" rel="noopener">Apollo Guesthouse</a><span class="hsrc">Booking.com</span>
+      <div class="hmeta">Yeongdeungpo-gu, Seoul · Quadruple Room — 4 twin beds, fits 3 comfortably · 7.6 Good (323 reviews)</div>
+      <div class="hprice"><b>$57.20</b>/night · $172 total · <b>$57</b>/person</div>
+      <p class="fine">Four real twin beds — closest to 3 single beds of the bunch. Good subway access.</p>
+    </div>
+
+    <div class="rec-city">🇯🇵 Tokyo <span class="rec-when">· Nov 27 – Dec 5 · 8 nights</span></div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.agoda.com/asakusa-skytree-easy-access-to-airport-4-guests/hotel/tokyo-jp.html?countryId=3&adults=3&children=0&rooms=1&checkIn=2026-11-27&currencyCode=USD&los=8" target="_blank" rel="noopener">Asakusa / Skytree house</a><span class="hsrc">Agoda</span>
+      <div class="hmeta">Asakusa, Taito · Entire house (16 m²) — 1 single + 1 semi-double + 1 sofa bed · 9.6 Exceptional · non-refundable</div>
+      <div class="hprice"><b>$46</b>/night · $368 total · <b>$123</b>/person <span class="fine">before taxes</span></div>
+      <p class="fine">Full kitchen + washing machine. Only 7 reviews and a weak location score (4.0) — the gamble pick.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.booking.com/hotel/jp/joe-backpackers.html?checkin=2026-11-27&checkout=2026-12-05&group_adults=3&no_rooms=1" target="_blank" rel="noopener">Joe Backpackers</a><span class="hsrc">Booking.com</span>
+      <div class="hmeta">Kita-Asakusa, Taito · Twin Room — 2 bunk beds (4 berths), private room · 7.9 Good (313 reviews)</div>
+      <div class="hprice"><b>$52.71</b>/night · $422 total · <b>$141</b>/person</div>
+      <p class="fine">Private room for 3, but the bathroom is shared.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.booking.com/hotel/jp/2jie-xiao-yan-yi-tu-bu-15fen-shou-rong-4ren-cheng-tian-yu-tian-karabasuzhi-tong.html?checkin=2026-11-27&checkout=2026-12-05&group_adults=3&no_rooms=1" target="_blank" rel="noopener">Koiwa 2-bedroom apartment</a><span class="hsrc">Booking.com</span>
+      <div class="hmeta">Edogawa, Tokyo · Entire 2-bedroom apartment — 1 full bed + 2 futons · 8.9 Fabulous (23 reviews)</div>
+      <div class="hprice"><b>$59</b>/night · $472 total · <b>$157</b>/person</div>
+      <p class="fine">Whole apartment, but 2 of the 3 sleeping spots are futons and it's ~9 miles from downtown.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.booking.com/hotel/jp/best-access-from-hnd-free-wifi-3ppl-max.html?checkin=2026-11-27&checkout=2026-12-05&group_adults=3&no_rooms=1" target="_blank" rel="noopener">Van Bell Koyo 2</a><span class="hsrc">Booking.com</span>
+      <div class="hmeta">Ota Ward, Tokyo · Entire 1-bedroom apartment — 2 twin beds + 1 futon · 7.9 Good (58 reviews) · free cancellation</div>
+      <div class="hprice"><b>$62.57</b>/night · $501 total · <b>$167</b>/person</div>
+      <p class="fine">Good access from Haneda Airport; 2 real twin beds plus a futon.</p>
+    </div>
+    <div class="card hotel">
+      <a class="hotel-name" href="https://www.booking.com/hotel/jp/1-jr-jujo-station-11mins-to-shinjuku-19mins-to-shibuya.html?checkin=2026-11-27&checkout=2026-12-05&group_adults=3&no_rooms=1" target="_blank" rel="noopener">Jujo Stay Sanyo Mansion</a><span class="hsrc">Booking.com</span>
+      <div class="hmeta">Jujo, Kita · 1-bedroom apartment with balcony — 2 bunk beds + 1 sofa bed · 7.6 Good (39 reviews)</div>
+      <div class="hprice"><b>$62.71</b>/night · $502 total · <b>$167</b>/person</div>
+      <p class="fine">11 min to Shinjuku by JR. Listing warns additional charges may apply — read the fine print.</p>
+    </div>
+
+    <div class="card">
+      <p class="fine">Caveats: Agoda's totals exclude taxes; Booking.com shows the site's listed stay totals. The cheapest Seoul options use bunk beds — Apollo's 4 twin beds are the closest to 3 true singles. In Tokyo the cheapest picks are apartments, and futons are common. Prices were live on Sep 24 and will move.</p>
     </div>
   </section>
 
@@ -1524,46 +1609,37 @@
     </div>
 
   <!-- PACKING -->
-  <section class="tabpane" id="pane-packing">
+    <section class="tabpane" id="pane-packing">
     <h2>🎒 Packing checklist</h2>
-    <p style="color:var(--muted);margin-top:-6px">Check things off in the spreadsheet's Packing tab — late-November Seoul is properly cold.</p>
+    <p style="color:var(--muted);margin-top:-6px">Tap to check things off — your progress is saved on this device. Late-November Seoul is properly cold.</p>
     <div class="card">
       <div class="pack-cat">🧥 Clothing</div>
-      <ul class="pack">
-        <li>Warm winter coat <span>Seoul highs ~5°C</span></li>
-        <li>Sweaters / fleece layers</li>
-        <li>Long pants × 3–4</li>
-        <li>Warm socks</li>
-        <li>Comfortable walking shoes</li>
-        <li>Scarf, gloves, beanie</li>
-        <li>Sleepwear</li>
-      </ul>
+        <label class="pack-item"><input type="checkbox" data-pack="pk0"><span>Warm winter coat <span>Seoul highs ~5°C</span></span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk1"><span>Sweaters / fleece layers</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk2"><span>Long pants × 3–4</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk3"><span>Warm socks</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk4"><span>Comfortable walking shoes</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk5"><span>Scarf, gloves, beanie</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk6"><span>Sleepwear</span></label>
       <div class="pack-cat">🧴 Toiletries</div>
-      <ul class="pack">
-        <li>Toothbrush &amp; toothpaste</li>
-        <li>Skincare / moisturizer <span>Cold dry air</span></li>
-        <li>Medications</li>
-      </ul>
+        <label class="pack-item"><input type="checkbox" data-pack="pk7"><span>Toothbrush &amp; toothpaste</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk8"><span>Skincare / moisturizer <span>Cold dry air</span></span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk9"><span>Medications</span></label>
       <div class="pack-cat">🔌 Electronics</div>
-      <ul class="pack">
-        <li>Phone + charger</li>
-        <li>Portable battery</li>
-        <li>Power adapter <span>Japan: Type A/B · Korea: Type C/F</span></li>
-        <li>eSIM activation info</li>
-      </ul>
+        <label class="pack-item"><input type="checkbox" data-pack="pk10"><span>Phone + charger</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk11"><span>Portable battery</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk12"><span>Power adapter <span>Japan: Type A/B · Korea: Type C/F</span></span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk13"><span>eSIM activation info</span></label>
       <div class="pack-cat">📄 Documents</div>
-      <ul class="pack">
-        <li>Passport <span>Check the expiry date</span></li>
-        <li>Flight confirmations</li>
-        <li>Hotel confirmations</li>
-        <li>Travel insurance</li>
-      </ul>
+        <label class="pack-item"><input type="checkbox" data-pack="pk14"><span>Passport <span>Check the expiry date</span></span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk15"><span>Flight confirmations</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk16"><span>Hotel confirmations</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk17"><span>Travel insurance</span></label>
       <div class="pack-cat">🎒 Misc</div>
-      <ul class="pack">
-        <li>Daypack</li>
-        <li>Cash (¥ and ₩)</li>
-      </ul>
+        <label class="pack-item"><input type="checkbox" data-pack="pk18"><span>Daypack</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk19"><span>Cash (¥ and ₩)</span></label>
     </div>
+    <p style="margin-top:10px"><a href="#" id="pack-reset" style="font-size:.85rem;color:var(--muted)">Reset checklist</a></p>
   </section>
 
   <!-- SPREADSHEET -->
@@ -1571,6 +1647,7 @@
     <h2>📊 Trip spreadsheet</h2>
     <div class="card">
       <p style="margin-top:0">The full day-by-day plan lives in the Google Sheet — edit it there, then tell me and I'll update the site.</p>
+      <p class="fine" style="margin-top:0">If the preview below is blank, the sheet is private to your Google account — use the button above to open it instead.</p>
       <a href="https://docs.google.com/spreadsheets/d/1HSxXDJ1D85xHB_bxp7EJnVEICunLw4QikU5hqoFj45A/edit"
          target="_blank" rel="noopener"
          style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;
@@ -1618,6 +1695,22 @@
     }
   }
   function backToRecs(){ showTab("recs"); window.scrollTo({top:0,behavior:"smooth"}); }
+  // Packing checklist persistence
+  document.querySelectorAll("[data-pack]").forEach(cb => {
+    try { cb.checked = localStorage.getItem("pack:" + cb.dataset.pack) === "1"; } catch(e) {}
+    cb.addEventListener("change", () => {
+      try { localStorage.setItem("pack:" + cb.dataset.pack, cb.checked ? "1" : "0"); } catch(e) {}
+    });
+  });
+  var pr = document.getElementById("pack-reset");
+  if (pr) pr.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.querySelectorAll("[data-pack]").forEach(cb => {
+      cb.checked = false;
+      try { localStorage.removeItem("pack:" + cb.dataset.pack); } catch(e2) {}
+    });
+  });
+
   document.addEventListener("click",function(e){
     var c=e.target.closest("[data-guide]");
     if(c){ openGuide(c.getAttribute("data-guide")); }
