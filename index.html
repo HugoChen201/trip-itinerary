@@ -149,6 +149,17 @@
   .mapline a:hover { text-decoration: underline; }
 
   /* Recommendations */
+  .card.rec{cursor:pointer;transition:border-color .15s}
+  .card.rec:hover{border-color:var(--accent)}
+  .tap-hint{color:var(--accent);font-size:.85rem;white-space:nowrap}
+  .gcard{scroll-margin-top:14px}
+  .gwhy{margin:6px 0}
+  .gtips{margin:6px 0 6px 18px;padding:0}
+  .gtips li{margin:3px 0}
+  .gsrc{font-size:.85rem;color:var(--muted)}
+  .gcard.flash{animation:gflash 1.8s ease}
+  @keyframes gflash{0%{box-shadow:0 0 0 3px var(--accent)}100%{box-shadow:0 0 0 0 transparent}}
+
   .rec-city { font-size: 1.1rem; font-weight: 800; margin: 22px 0 4px; }
   .rec-city:first-of-type { margin-top: 4px; }
   .rec-when { color: var(--muted); font-size: .85rem; font-weight: 600; }
@@ -209,6 +220,7 @@
     <button class="tab" data-tab="calendar">📅 Calendar</button>
     <button class="tab" data-tab="flights">✈️ Flights</button>
     <button class="tab" data-tab="recs">✨ Recommendations</button>
+    <button class="tab" data-tab="guide">🗺️ Guide</button>
     <button class="tab" data-tab="budget">💰 Budget</button>
     <button class="tab" data-tab="packing">🎒 Packing</button>
     <button class="tab" data-tab="sheet">📊 Spreadsheet</button>
@@ -288,120 +300,399 @@
   </section>
 
   <!-- RECOMMENDATIONS -->
-  <section class="tabpane" id="pane-recs">
+    <section class="tabpane" id="pane-recs">
     <h2>✨ Muse's recommendations</h2>
-    <p style="color:var(--muted);margin-top:-6px">Picks timed to your dates — late November in Seoul &amp; Incheon, early December in Tokyo.</p>
+    <p style="color:var(--muted);margin-top:-6px">Sourced from real travelers — tap any card for the full guide entry with tips.</p>
 
     <div class="rec-city">🇰🇷 Seoul <span class="rec-when">· Nov 23–27</span></div>
-    <div class="card rec">
+    <div class="card rec" data-guide="autumn-festa">
       <div class="emoji">🎭</div>
-      <div><b>2026 Seoul Autumn Festa<span class="dates-tag">Sep 18 – Nov 29</span></b>
-      <p>A citywide performing-arts festival — dance, theater, music and traditional arts across Seoul under the theme "Seoul's Autumn: The City Becomes Art." It overlaps your entire Seoul stay. <a href="https://www.travelmole.com/news/365-day-festival-destination-seoul/" target="_blank" rel="noopener">Details ↗</a></p></div>
+      <div><b>2026 Seoul Autumn Festa</b><span class="dates-tag">Sep 19 – Nov 29</span>
+      <p>A citywide performing-arts festival — dance, theater, music and traditional arts across Seoul under the theme "Seoul's Autumn: The City Becomes Art." It overlaps your entire Seoul stay. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="foliage">
       <div class="emoji">🍂</div>
       <div><b>Late autumn foliage</b>
-      <p>You'll catch the tail end of fall colors — Namsan Park, Seoul Forest and the palace grounds (Gyeongbokgung, Changdeokgung) are the classic spots.</p></div>
+      <p>You'll catch the tail end of fall colors — Namsan Park, Seoul Forest and the palace grounds (Gyeongbokgung, Changdeokgung) are the classic spots. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="gwangjang">
       <div class="emoji">🍢</div>
-      <div><b>Eat: Gwangjang Market &amp; Myeongdong</b>
-      <p>Gwangjang for bindaetteok and knife-cut noodles, Myeongdong for street-food grazing after dark. Cold-weather food hits different.</p></div>
+      <div><b>Eat: Gwangjang Market</b>
+      <p>Gwangjang for bindaetteok and knife-cut noodles — travelers call it the single best food stop in Seoul, especially in November when the stall steam hits the crisp air. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="mangwon-market">
+      <div class="emoji">🧺</div>
+      <div><b>Mangwon Market (the locals' Gwangjang)</b>
+      <p>The locals' answer to Gwangjang — "fresh produce + authentic eats, way less touristy." Tteokbokki and fried-chicken stalls are the standouts, plus vintage shops on the side streets. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="myeongdong-kyoja">
+      <div class="emoji">🍜</div>
+      <div><b>Myeongdong Kyoja (kalguksu)</b>
+      <p>A repeatedly-named restaurant: handmade kalguksu (knife-cut noodles) and mandu (dumplings), ~₩11,000. "A must-visit for food lovers" — perfect cold-weather lunch. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="tosokchon">
+      <div class="emoji">🍲</div>
+      <div><b>Tosokchon Samgyetang</b>
+      <p>The famous ginseng chicken soup spot — whole chicken stuffed with rice in hot broth, ~₩15,000–20,000. Five minutes from Gyeongbokgung: the classic post-palace lunch. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="chimaek">
+      <div class="emoji">🍗</div>
+      <div><b>Chimaek: fried chicken + beer</b>
+      <p>"Korean fried chicken reaches its seasonal peak during November nights" — a social ritual, not just a meal. Hongdae has the highest density of chicken-and-beer joints. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="noryangjin">
+      <div class="emoji">🦀</div>
+      <div><b>Noryangjin Fish Market</b>
+      <p>"You pick your seafood downstairs, restaurants upstairs cook it for you" — Seoul's most hands-on food experience. Sashimi, crab, live octopus (sannakji) for the brave. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="myeongdong-night">
       <div class="emoji">🌃</div>
-      <div><b>Neighborhoods: Hongdae + Bukchon</b>
-      <p>Hongdae for nightlife, buskers and street energy after dark; Bukchon Hanok Village + Insadong for traditional streets and tea houses — go early morning to beat the crowds.</p></div>
+      <div><b>Myeongdong street food at night</b>
+      <p>"Shopping + street food heaven (come hungry!)" — the TikTok-consensus first-timer stop, best after dark when the stalls light up. <span class="tap-hint">Details →</span></p></div>
     </div>
-
-    <div class="card rec">
+    <div class="card rec" data-guide="gyeongbokgung">
+      <div class="emoji">🏯</div>
+      <div><b>Gyeongbokgung Palace + hanbok rental</b>
+      <p>The #1 first-timer cultural stop. Renting a hanbok gets you FREE palace entry (~₩15,000–30,000 for 4 hours from shops around the palace). <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="changdeokgung">
+      <div class="emoji">🍁</div>
+      <div><b>Changdeokgung Secret Garden</b>
+      <p>"My favorite thing in Seoul — I did it in every season." The guided Secret Garden tour is the standout; regulars say the tour (not just the grounds) is what makes it. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="bukchon">
+      <div class="emoji">🏘️</div>
+      <div><b>Bukchon Hanok Village (go early)</b>
+      <p>Traditional hanok streets — gorgeous but packed by midday. "Go early morning to beat the crowds," then fold in Insadong's tea houses. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="eunpyeong">
+      <div class="emoji">⛰️</div>
+      <div><b>Eunpyeong Hanok Village</b>
+      <p>"Traditional hanok houses framed by mountains, but with none of the Bukchon crowds." The quieter alternative, with Bukhansan as the backdrop. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="ikseon-dong">
+      <div class="emoji">☕</div>
+      <div><b>Ikseon-dong + Seosulla-gil</b>
+      <p>Hanok alleyways converted into cafes, boutiques, and bars — "getting lost in Ikseon-dong's web of lanes is part of the fun." Named one of 2026's coolest neighborhoods. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="hongdae">
+      <div class="emoji">🎶</div>
+      <div><b>Hongdae after dark</b>
+      <p>"The heart of Seoul's nightlife with street performers, quirky shops, bars, photobooths + all the vibes." By day: indie shops and the Saturday Free Market; by night: buskers, clubs, bars. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="seongsu">
+      <div class="emoji">🏭</div>
+      <div><b>Seongsu-dong</b>
+      <p>Seoul's current "it" neighborhood — converted warehouses, Gentle Monster's surreal Haus Nowhere flagship (giant sleeping dog), pop-ups, K-beauty. "Way better vibes" than Myeongdong, per TikTok. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="cheonggyecheon">
+      <div class="emoji">💧</div>
+      <div><b>Cheonggyecheon Stream evening walk</b>
+      <p>"A peaceful riverside walk right in the city center, perfect for a calm reset" — best at night when it's lit up. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="n-tower">
       <div class="emoji">🗼</div>
       <div><b>N Seoul Tower (Namsan)</b>
-      <p>Cable car or hike up Namsan for the classic Seoul panorama — go at sunset and stay for the city lights.</p></div>
+      <p>Cable car or hike up Namsan for the classic Seoul panorama — go at sunset and stay for the city lights. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
-      <div class="emoji">♨️</div>
-      <div><b>Jjimjilbang (Korean sauna)</b>
-      <p>Dragon Hill Spa near Yongsan is open 24 hours — hot baths, saunas, nap rooms. A great reset for your groggy arrival morning if the hotel room isn't ready yet.</p></div>
+    <div class="card rec" data-guide="seoul-forest">
+      <div class="emoji">🌳</div>
+      <div><b>Seoul Forest</b>
+      <p>"One of my favorite parks in Seoul, especially scenic during autumn" — metasequoia and ginkgo avenues, free deer feeding, butterfly garden. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
-      <div class="emoji">🛍️</div>
-      <div><b>Dongdaemun + DDP</b>
-      <p>Seoul's late-night shopping district — malls open past midnight — wrapped around the Dongdaemun Design Plaza, Zaha Hadid's alien-looking landmark. Good Thursday-night shopping run.</p></div>
+    <div class="card rec" data-guide="nodeul">
+      <div class="emoji">🌅</div>
+      <div><b>Nodeul Island sunset</b>
+      <p>The insider Han River pick: "Don't waste time at the crowded Han parks — go to Nodeul Island instead." Mostly locals, great sunset views, live-music venue on the island. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="hangang">
       <div class="emoji">🌉</div>
       <div><b>Hangang (Han River) parks</b>
-      <p>Yeouido or Banpo Hangang Park for riverside walks and night views — grab convenience-store snacks and join the locals by the water.</p></div>
+      <p>Yeouido or Banpo Hangang Park for riverside walks and night views — grab convenience-store snacks and join the locals by the water. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="gyeongui-bread">
+      <div class="emoji">🍞</div>
+      <div><b>Gyeongui Line Forest Park + salt bread</b>
+      <p>A trendy linear park built on an old rail line, lined with cafes. The TikTok-famous stop: Jayeondo Sogeumppang — "don't miss the famous salt bread." <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="sauna">
+      <div class="emoji">♨️</div>
+      <div><b>Jjimjilbang (Korean sauna)</b>
+      <p>"Like Japanese onsen on steroids" — the #1 weird-in-a-good-way Seoul experience. Aquafield (inside Starfield malls) is the premium pick; Hongdae's 24-hour Bulgama Sauna is the budget one. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="noraebang">
+      <div class="emoji">🎤</div>
+      <div><b>Coin noraebang (karaoke)</b>
+      <p>Private karaoke rooms by the hour — the classic 3-guys night activity. Coin noraebang booths are cheapest (~₩1,000–4,000/song). Open late. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="dongdaemun">
+      <div class="emoji">🛍️</div>
+      <div><b>Dongdaemun + DDP (+ Namdaemun)</b>
+      <p>Seoul's late-night shopping district — malls open past midnight — wrapped around Zaha Hadid's alien-looking Dongdaemun Design Plaza. Good Thursday-night shopping run. <span class="tap-hint">Details →</span></p></div>
     </div>
 
     <div class="rec-city">🇰🇷 Incheon <span class="rec-when">· Nov 27 — airport day</span></div>
-    <div class="card rec">
+    <div class="card rec" data-guide="chinatown">
       <div class="emoji">🏮</div>
       <div><b>Incheon Chinatown</b>
-      <p>Korea's oldest Chinatown — and the birthplace of jajangmyeon. Compact, walkable, and a good lunch stop on your way to ICN.</p></div>
+      <p>Korea's oldest Chinatown — and the birthplace of jajangmyeon. Compact, walkable, and a good lunch stop on your way to ICN. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="fairytale-village">
+      <div class="emoji">🧚</div>
+      <div><b>Songwol-dong Fairytale Village</b>
+      <p>A 19th-century foreign-settler village restored with whimsical fairy-tale murals and sculptures — "quirky but cute," great on a sunny day. A Goblin filming location is nearby. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="sinpo-market">
+      <div class="emoji">🍗</div>
+      <div><b>Sinpo International Market</b>
+      <p>Traditional market famous nationwide for dakgangjeong (sweet-crunchy fried chicken) — "famous spice coated fried chicken for 17000 won/bucket worth the trip." <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="jajang-museum">
+      <div class="emoji">🏛️</div>
+      <div><b>Jajangmyeon Museum</b>
+      <p>Housed in Gonghwachun, the first restaurant to serve jajangmyeon in Korea — a fun, quick cultural stop for food nerds right before eating the real thing. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="open-port">
+      <div class="emoji">⚓</div>
+      <div><b>Incheon Open Port Area</b>
+      <p>The most historically rich part of Incheon — 1883 open-port-era buildings in Chinese, Japanese, and Western styles. The Jemulpo Club (1901, free) and mural streets are the highlights. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="jayu-park">
+      <div class="emoji">🌳</div>
+      <div><b>Jayu Park (Freedom Park)</b>
+      <p>Korea's first Western-style park, with the Seokjeongnu Pavilion viewpoint over Incheon's coast and port — a calm sunset/stroll spot to end the old-town loop. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="songdo">
       <div class="emoji">🛶</div>
       <div><b>Songdo Central Park</b>
-      <p>The centerpiece of Korea's futuristic planned city — kayak the seawater canal, stroll the gardens, see the skyline. About 30 min from the airport.</p></div>
+      <p>The centerpiece of Korea's futuristic planned city — kayak the seawater canal, stroll the gardens, see the skyline. About 30 min from the airport. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="g-tower">
+      <div class="emoji">🔭</div>
+      <div><b>G-Tower Observatory</b>
+      <p>Free 33rd-floor observatory with panoramic views of Songdo, Incheon Bridge, and the West Sea — go at sunset for golden light on the water. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="wolmido">
       <div class="emoji">🎡</div>
       <div><b>Wolmido boardwalk</b>
-      <p>Retro seaside boardwalk with old-school rides and street food — charmingly dated, fun for an hour if you have time to kill before ICN.</p></div>
+      <p>Retro seaside boardwalk with the famous Viking ride and Disco Pang Pang (bumper cars to club music, famous from Korean TV) — charmingly dated, fun for an hour before ICN. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="rail-bike">
+      <div class="emoji">🚲</div>
+      <div><b>Yeongjong Seaside Rail Bike</b>
+      <p>A 30–45-min pedal rail-bike ride along the coast on the same island as ICN airport — the ideal "last activity before the airport" stop. <span class="tap-hint">Details →</span></p></div>
     </div>
 
     <div class="rec-city">🇯🇵 Tokyo <span class="rec-when">· Nov 27 – Dec 5</span></div>
-    <div class="card rec">
+    <div class="card rec" data-guide="rikugien">
       <div class="emoji">🍁</div>
-      <div><b>Rikugien Garden night illuminations<span class="dates-tag">Nov 25 – Dec 6</span></b>
-      <p>One of Tokyo's most beautiful Edo-period landscape gardens, open 6–8:30 PM for illuminated autumn foliage — right in the middle of your Tokyo days, easy JR Yamanote access. <a href="https://soranews24.com/2026/09/09/tokyos-rikugien-garden-announces-nighttime-foliage-illumination-event-ahead-of-autumn/" target="_blank" rel="noopener">Details ↗</a></p></div>
+      <div><b>Rikugien Garden night illuminations</b><span class="dates-tag">Nov 25 – Dec 6</span>
+      <p>One of Tokyo's most beautiful Edo-period landscape gardens, open 6–8:30 PM for illuminated autumn foliage — right in the middle of your Tokyo days, easy JR Yamanote access. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
-      <div class="emoji">✨</div>
-      <div><b>Winter illuminations</b>
-      <p>Peak season while you're there: Roppongi Hills (Nov 4–Dec 25), Roppongi Midtown (early Nov–Dec 25), Shibuya Blue Cave (early Dec–Dec 25) and Marunouchi near Tokyo Station. <a href="https://www.kyuhoshi.com/winter-illumination-in-tokyo/" target="_blank" rel="noopener">Guide ↗</a></p></div>
+    <div class="card rec" data-guide="keyakizaka">
+      <div class="emoji">💡</div>
+      <div><b>Roppongi Hills Keyakizaka Illumination</b><span class="dates-tag">~Nov 4 – Dec 25</span>
+      <p>The iconic Tokyo winter shot: 400m of "Snow &amp; Blue" LEDs down Keyakizaka — stand at the bridge near Louis Vuitton for Tokyo Tower centered in frame. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="marunouchi">
+      <div class="emoji">🥂</div>
+      <div><b>Marunouchi Naka-dori Illumination</b><span class="dates-tag">~Nov 13 – Feb 15</span>
+      <p>340+ trees in "Champagne Gold" along the avenue by Tokyo Station — feels like a European boulevard; less flashy, more elegant than Roppongi. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="blue-cave">
+      <div class="emoji">🔵</div>
+      <div><b>Shibuya Blue Cave (Ao no Dokutsu)</b><span class="dates-tag">~Dec 4 – 25</span>
+      <p>A dense tunnel of blue LEDs from Shibuya toward Yoyogi Park — "incredibly famous... surreal, immersive blue world." Starts Dec 4, DURING your trip. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="midtown-rink">
+      <div class="emoji">⛸️</div>
+      <div><b>Tokyo Midtown Starlight Garden + ice rink</b><span class="dates-tag">~Nov 13 – Dec 25</span>
+      <p>A light show with music, not just decoration — and an outdoor skating rink under the lights, the festive pick for a group. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="azabudai-market">
       <div class="emoji">🎄</div>
-      <div><b>Christmas markets</b>
-      <p>Meiji Jingu Gaien market runs from Nov 21, and Yokohama Red Brick Warehouse from Nov 21 — glühwein and a good evening out. <a href="https://www.snowmonkeyresorts.com/news/tokyo-in-december/" target="_blank" rel="noopener">December guide ↗</a></p></div>
+      <div><b>Azabudai Hills Christmas Market</b><span class="dates-tag">~Nov 22 – Dec 25</span>
+      <p>Free-entry Christmas market + illuminations at the base of Japan's tallest skyscraper — modern and less tourist-trodden than the big ones. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="yomiuriland">
+      <div class="emoji">🎢</div>
+      <div><b>Yomiuriland Jewellumination</b><span class="dates-tag">~Oct 23 – Apr 5</span>
+      <p>6.5 million gemstone-themed lights by world-famous lighting designer Mikiko Ishii — ride a rollercoaster THROUGH the lights or view from the Ferris wheel. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="shin-xmas-market">
+      <div class="emoji">🍷</div>
+      <div><b>Tokyo Christmas Market @ Shin-Toyosu</b><span class="dates-tag">Nov 20 – Dec 25</span>
+      <p>The big Tokyo Christmas Market moved to Shin-Toyosu this year (¥1,000–2,000 entry) — glühwein and a good evening out. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="shiba-xmas">
+      <div class="emoji">🗼</div>
+      <div><b>Christmas Market @ Shiba Park</b><span class="dates-tag">Dec 4 – 25</span>
+      <p>A second Christmas market run at Shiba Park by Tokyo Tower — pairs perfectly with the tower lit up at night. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="ueno-advent">
+      <div class="emoji">🎅</div>
+      <div><b>Christmas Advent in Ueno Park</b><span class="dates-tag">Nov 19 – Dec 25</span>
+      <p>Debuting in Ueno Park — free entry, 150 Santas from around the world. The budget-friendly Christmas stop. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="yokohama-xmas">
+      <div class="emoji">🧱</div>
+      <div><b>Yokohama Red Brick Christmas Market</b><span class="dates-tag">from Nov 21</span>
+      <p>The classic: Red Brick Warehouse Christmas market, Minato Mirai lights and Japan's biggest Chinatown — 30 minutes by train, easy evening trip. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="meiji-xmas">
+      <div class="emoji">⛪</div>
+      <div><b>Meiji Jingu Gaien Christmas Market</b><span class="dates-tag">from Nov 21</span>
+      <p>The Gaien market runs from Nov 21 — glühwein under the ginkgo trees, two seasonal hits in one spot. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="shibuya-sky">
+      <div class="emoji">🌇</div>
+      <div><b>Shibuya Sky</b>
+      <p>360° open-air rooftop 229m above the Scramble — "widely considered the best sunset spot," "the one most first-timers end up loving most." <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="tokyo-tower">
+      <div class="emoji">🗼</div>
+      <div><b>Tokyo Tower (Main Deck)</b>
+      <p>The budget classic: ~¥1,200–1,500, no advance booking, the classic look — best at night when lit. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="tmgb">
+      <div class="emoji">🏙️</div>
+      <div><b>Tokyo Metro Gov Building (FREE observatory)</b>
+      <p>FREE observatory in Shinjuku — plus free evening projection-mapping shows on the building (7 PM, every 30 min till 9:30 PM). Best free night activity in the city. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="shinjuku-gyoen">
+      <div class="emoji">🍂</div>
+      <div><b>Shinjuku Gyoen</b>
+      <p>Golden ginkgos + last maples in early December. "There were the last vestiges of maple leaves and golden ginkgos. It was absolutely lovely." <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="ginkgo-avenue">
+      <div class="emoji">🌟</div>
+      <div><b>Meiji Jingu Gaien ginkgo avenue</b><span class="dates-tag">peak late Nov</span>
+      <p>Rows of golden ginkgo trees — peak color lands exactly on your Tokyo dates. Go on a weekday morning to dodge the crowds. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="takao">
+      <div class="emoji">🥾</div>
+      <div><b>Mt. Takao (day trip)</b>
+      <p>Easy hiking + cable car option, autumn leaves festival — TikTok/Reddit's go-to "nature escape" from the city, ~50 min away. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="asakusa">
+      <div class="emoji">⛩️</div>
+      <div><b>Asakusa / Senso-ji (early morning)</b>
+      <p>Tokyo's oldest temple — "especially in the morning before crowds build." Nakamise street snacks after. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="yanaka">
+      <div class="emoji">🐱</div>
+      <div><b>Yanaka Ginza</b>
+      <p>"The Tokyo that survived": pre-war wooden houses, 70-shop traditional shotengai, known as Tokyo's "cat town." Try menchi katsu at Niku no Sato. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="shimokitazawa">
+      <div class="emoji">👕</div>
+      <div><b>Shimokitazawa</b>
+      <p>Vintage shops (Flamingo, Pug Tokyo), indie theaters, tiny live-music venues (Basement Bar, Shelter). Artsy/bohemian, great for an afternoon browse. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="koenji">
+      <div class="emoji">🎸</div>
+      <div><b>Koenji</b>
+      <p>Shimokitazawa's rougher, cheaper sibling: vintage + live music, strong local-creative vibe, fewer tourists. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="kichijoji">
+      <div class="emoji">🦢</div>
+      <div><b>Kichijoji + Inokashira Park</b>
+      <p>Repeatedly voted Tokyo's most livable neighborhood — relaxed trendy shops, park boating, "more local and laid-back vibe." <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="ueno-ameyoko">
+      <div class="emoji">🏮</div>
+      <div><b>Ueno / Ameyoko</b>
+      <p>Loud, bustling open-air market street: wholesale shops, cheap eats, people-watching. Good budget shopping stop. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="tsukiji">
+      <div class="emoji">🍣</div>
+      <div><b>Tsukiji Outer Market (early morning)</b>
+      <p>Seafood breakfast (tuna sashimi, grilled eel/scallops) — but go before 9 AM. At lunch it's "absolutely jam packed... eating food in a busy street market is very stressful." <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="depachika">
+      <div class="emoji">🍱</div>
+      <div><b>Depachika (dept-store food halls)</b>
+      <p>"One of the best discoveries of our trip... ready-to-eat food of every variety — bento, katsu, sushi" (Isetan Shinjuku etc.). Cheap, incredible quality, great for group grazing. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="ichiran">
+      <div class="emoji">🍜</div>
+      <div><b>Ichiran Ramen</b>
+      <p>Foreigner-friendly ticket-machine solo ramen — "the ordering process is very efficient... I can see why it's popular with tourists." ~¥1,000/bowl. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="monjayaki">
+      <div class="emoji">🥘</div>
+      <div><b>Monjayaki on Monja Street, Tsukishima</b>
+      <p>Tokyo's local specialty — a runny savory pancake you cook yourself on the grill. Fun group activity; popular spots line up at lunch. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="omoide-goldengai">
+      <div class="emoji">🍶</div>
+      <div><b>Omoide Yokocho + Golden Gai</b>
+      <p>Yakitori smoke alleys and six tiny streets of closet-sized bars — the quintessential Tokyo night out. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="sumo">
+      <div class="emoji">🤼</div>
+      <div><b>Sumo morning practice (asageiko)</b>
+      <p>No Tokyo tournament during your dates (Nov basho is in Fukuoka) — but stables hold morning practice, and a Viator listing shows bookable Dec 1–30, 2026 Mon–Sat 8–10 AM slots. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="karaoke">
+      <div class="emoji">🎤</div>
+      <div><b>Karaoke Kan (private-room karaoke)</b>
+      <p>The classic group night — "many locations offer late-night deals." Perfect for 3 guys. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="arcades">
+      <div class="emoji">🕹️</div>
+      <div><b>Arcades: Taito Station / Round1 / Super Potato</b>
+      <p>Claw machines, rhythm games; Round1 adds bowling + karaoke under one roof (some 24h); Super Potato for retro games. Akihabara/Shinjuku. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="gokart">
+      <div class="emoji">🏎️</div>
+      <div><b>Street go-karting</b>
+      <p>"One of the more wacky (and popular) tourist activities" — kart through Shibuya/Shinjuku/Akihabara in costume. ¥7,200–18,000. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="toyosu-onsen">
+      <div class="emoji">♨️</div>
+      <div><b>Toyosu Senkyaku Banrai + Manyo Club onsen</b>
+      <p>Edo-village food complex next to Toyosu Market plus a 24-hour onsen (~¥4,000): indoor/outdoor baths, rooftop 360° foot bath (free), relaxation rooms, buffet. TikTok: "Worth the money for sure!" <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="kamakura">
       <div class="emoji">⛩️</div>
       <div><b>Day trip: Kamakura + Enoshima</b>
-      <p>Temples and shrines in Kamakura by day, Enoshima's seaside illuminations after dark — about an hour from central Tokyo.</p></div>
+      <p>Temples and shrines in Kamakura by day, Enoshima's seaside illuminations after dark — about an hour from central Tokyo. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
-      <div class="emoji">🍂</div>
-      <div><b>Meiji Jingu Gaien ginkgo avenue<span class="dates-tag">peak late Nov</span></b>
-      <p>Rows of golden ginkgo trees — peak color lands exactly on your Tokyo dates. Go on a weekday morning to dodge the crowds. <a href="https://www.airial.travel/attractions/japan/minato-city/meiji-jingu-gaien-ginkgo-avenue-tokyo-EVwh356R" target="_blank" rel="noopener">Details ↗</a></p></div>
+    <div class="card rec" data-guide="jewels-shonan">
+      <div class="emoji">🌉</div>
+      <div><b>Enoshima "Jewels of Shonan"</b><span class="dates-tag">late Nov – Feb</span>
+      <p>The whole island of Enoshima lights up for winter — pair it with the Kamakura day trip and stay for the night illuminations at Samuel Cocking Garden. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
-      <div class="emoji">🎄</div>
-      <div><b>More Christmas markets (2026)</b>
-      <p>The big Tokyo Christmas Market moves to <b>Shin-Toyosu</b> this year <span class="dates-tag">Nov 20 – Dec 25</span> (¥1,000–2,000 entry), plus a second run at <b>Shiba Park</b> by Tokyo Tower <span class="dates-tag">Dec 4 – 25</span>. And <b>Christmas Advent</b> debuts in Ueno Park <span class="dates-tag">Nov 19 – Dec 25</span> — free entry, 150 Santas from around the world. <a href="https://tokyocheapo.com/entertainment/christmas-markets-in-tokyo/" target="_blank" rel="noopener">Details ↗</a></p></div>
-    </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="hakone">
       <div class="emoji">🗻</div>
       <div><b>Day trip: Hakone</b>
-      <p>Clear winter air = best Mt. Fuji visibility of the year. Open-air museum, Lake Ashi, onsen — about 2 hours via the Odakyu Romancecar from Shinjuku.</p></div>
+      <p>Clear winter air = best Mt. Fuji visibility of the year. Open-air museum, Lake Ashi, onsen — about 2 hours via the Odakyu Romancecar from Shinjuku. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="nikko">
+      <div class="emoji">🏯</div>
+      <div><b>Day trip: Nikko</b>
+      <p>UNESCO Toshogu Shrine dusted with early winter; Kegon Falls partially freezes. "Wish I'd given Nikko at least another day." <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="kawaguchiko">
+      <div class="emoji">🗻</div>
+      <div><b>Day trip: Kawaguchiko / Mt. Fuji</b>
+      <p>Winter has the year's clearest Fuji views — Chureito Pagoda (arrive before 7 AM to beat crowds), hoto noodle lunch, lakeside onsen. Go on a weekday. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="ashikaga">
+      <div class="emoji">✨</div>
+      <div><b>Ashikaga Flower Park "Garden of Light"</b><span class="dates-tag">~Late Oct – early Feb</span>
+      <p>5M+ LEDs on the famous wisteria trellises — "voted one of the best illumination events in the world," Reddit calls it "jaw-dropping." ~¥1,300. <span class="tap-hint">Details →</span></p></div>
+    </div>
+    <div class="card rec" data-guide="yokohama">
       <div class="emoji">🏙️</div>
       <div><b>Half day: Yokohama</b>
-      <p>Red Brick Warehouse Christmas market, Minato Mirai lights and Japan's biggest Chinatown — 30 minutes by train, easy evening trip.</p></div>
+      <p>Red Brick Warehouse Christmas market, Minato Mirai lights and Japan's biggest Chinatown — 30 minutes by train, easy evening trip. <span class="tap-hint">Details →</span></p></div>
     </div>
-    <div class="card rec">
+    <div class="card rec" data-guide="teamlab">
       <div class="emoji">💠</div>
       <div><b>teamLab</b>
-      <p>Planets or Borderless — the immersive digital-art museums. Tickets sell out days ahead, so book online before you fly.</p></div>
-    </div>
-    <div class="card rec">
-      <div class="emoji">🌉</div>
-      <div><b>Enoshima "Jewels of Shonan"<span class="dates-tag">late Nov – Feb</span></b>
-      <p>The whole island of Enoshima lights up for winter — pair it with the Kamakura day trip and stay for the night illuminations at Samuel Cocking Garden.</p></div>
+      <p>Planets or Borderless — the immersive digital-art museums. Tickets sell out days ahead, so book online before you fly. <span class="tap-hint">Details →</span></p></div>
     </div>
 
     <div class="rec-city">🗺️ Sample day-by-day <span class="rec-when">· starter template — move things around</span></div>
@@ -426,6 +717,787 @@
         <li><b>Fri Dec 4</b> — teamLab (book ahead) + Roppongi illuminations + Shiba Park Christmas market. Late night: head to Haneda — your flight leaves 1:30 AM.</li>
       </ul>
     </div>
+  </section>
+
+  <!-- GUIDE -->
+  <section class="tabpane" id="pane-guide">
+    <h2>🗺️ Travel guide</h2>
+    <p style="color:var(--muted);margin-top:-6px">Every recommendation with traveler tips and sources. <a href="#" onclick="backToRecs();return false;">← Back to recommendations</a></p>
+
+    <div class="rec-city">🇰🇷 Seoul <span class="rec-when">· Nov 23–27</span></div>
+    <div class="card gcard" id="g-autumn-festa">
+      <div class="emoji">🎭</div>
+      <div><b>2026 Seoul Autumn Festa</b><span class="dates-tag">Sep 19 – Nov 29</span>
+      <p class="gwhy">💬 The city's flagship fall festival — travelers like that big-ticket performances pop up all over the city instead of in one venue.</p>
+      <ul class="gtips">
+        <li>Check the program for English-friendly shows — dance and music need no translation</li>
+        <li>Many outdoor stages are free; ticketed theater shows sell ahead</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.travelmole.com/news/365-day-festival-destination-seoul/" target="_blank" rel="noopener">Details ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-foliage">
+      <div class="emoji">🍂</div>
+      <div><b>Late autumn foliage</b>
+      <p class="gwhy">💬 Late-November Seoul still holds color — travelers say the palace grounds with red maples are the prettiest free sight in the city.</p>
+      <ul class="gtips">
+        <li>Go on a weekday morning for empty paths</li>
+        <li>Seoul Forest's metasequoia avenue is the local-favorite shot</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://heyroseanne.com/autumn-in-seoul/" target="_blank" rel="noopener">Autumn in Seoul ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-gwangjang">
+      <div class="emoji">🍢</div>
+      <div><b>Eat: Gwangjang Market</b>
+      <p class="gwhy">💬 "The steam from countless food stalls creates a warm, enveloping atmosphere that contrasts beautifully with the crisp air outside."</p>
+      <ul class="gtips">
+        <li>Go-to orders: bindaetteok (mung bean pancake), mayak gimbap, kalguksu</li>
+        <li>Weekday beats weekend for crowds; pick busy stalls; carry some cash</li>
+        <li>Jongno 5-ga Station · budget ~₩8,000–15,000/person grazing</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.cityunscripted.com/travel-magazine/things-to-do-in-seoul-november" target="_blank" rel="noopener">November guide ↗</a> · <a href="https://www.agoda.com/travel-guides/south-korea/seoul/street-food-fiesta-explore-gwangjang-market-in-seouls-autumn/" target="_blank" rel="noopener">Street-food guide ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-mangwon-market">
+      <div class="emoji">🧺</div>
+      <div><b>Mangwon Market (the locals' Gwangjang)</b>
+      <p class="gwhy">💬 Travelers who've done both markets say Mangwon feels like the real Seoul — great food without the tour groups.</p>
+      <ul class="gtips">
+        <li>Daytime / early evening; pairs with a Hongdae day (one subway stop away)</li>
+        <li>Mangwon Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@christinajotravels/video/7507030502365416746" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://www.lemon8-app.com/experience/seoul-local-experience?region=sg" target="_blank" rel="noopener">Lemon8 ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-myeongdong-kyoja">
+      <div class="emoji">🍜</div>
+      <div><b>Myeongdong Kyoja (kalguksu)</b>
+      <p class="gwhy">💬 It's the specific restaurant name that comes up in almost every Seoul food thread.</p>
+      <ul class="gtips">
+        <li>There's often a lunch line — go slightly off-peak</li>
+        <li>~₩11,000 for noodles + dumplings</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://plantrip.io/itinerary/904730" target="_blank" rel="noopener">PlanTrip ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-tosokchon">
+      <div class="emoji">🍲</div>
+      <div><b>Tosokchon Samgyetang</b>
+      <p class="gwhy">💬 Travelers pair it with palace day without fail — it's the ritual lunch after Gyeongbokgung.</p>
+      <ul class="gtips">
+        <li>Ideal post-palace lunch; expect a midday wait</li>
+        <li>~₩15,000–20,000</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lemon8-app.com/@97.char/7493487181714309639?region=sg" target="_blank" rel="noopener">Lemon8 ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-chimaek">
+      <div class="emoji">🍗</div>
+      <div><b>Chimaek: fried chicken + beer</b>
+      <p class="gwhy">💬 The contrast of cool November air outside and hot crispy chicken inside is peak Seoul, per traveler after traveler.</p>
+      <ul class="gtips">
+        <li>Evenings in Hongdae; split a couple of orders + draft beer three ways — very budget-friendly</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.cityunscripted.com/travel-magazine/things-to-do-in-seoul-november" target="_blank" rel="noopener">November guide ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-noryangjin">
+      <div class="emoji">🦀</div>
+      <div><b>Noryangjin Fish Market</b>
+      <p class="gwhy">💬 Travelers call it the most interactive meal in Seoul — you choose it live, they cook it upstairs.</p>
+      <ul class="gtips">
+        <li>Walk a full lap before buying; agree on price + cooking plan up front</li>
+        <li>Wear grippy shoes (wet floors); most vendors take cards</li>
+        <li>Best as a dinner outing · Noryangjin Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.viator.com/Seoul-attractions/Noryangjin-Fish-Market/d973-a9035" target="_blank" rel="noopener">Viator ↗</a> · <a href="https://www.epickor.com/blog/258" target="_blank" rel="noopener">ePick ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-myeongdong-night">
+      <div class="emoji">🌃</div>
+      <div><b>Myeongdong street food at night</b>
+      <p class="gwhy">💬 It's touristy and slightly overpriced, but travelers agree the nighttime energy is the whole point.</p>
+      <ul class="gtips">
+        <li>Go hungry and graze · Myeongdong Station</li>
+        <li>Pairs with an evening after N Seoul Tower (nearby)</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@mataharidharma/video/7543374673166224662" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://plantrip.io/itinerary/904730" target="_blank" rel="noopener">PlanTrip ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-gyeongbokgung">
+      <div class="emoji">🏯</div>
+      <div><b>Gyeongbokgung Palace + hanbok rental</b>
+      <p class="gwhy">💬 "You must never leave the city without trying on hanbok" — and it doubles as your palace ticket.</p>
+      <ul class="gtips">
+        <li>CLOSED TUESDAYS — you're going Wed Nov 25, which is correct</li>
+        <li>Arrive at 9 AM opening for the changing-of-guard ceremony and empty photos</li>
+        <li>Gyeongbokgung Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://iamaileen.com/seoul-itinerary-south-korea/comment-page-2/" target="_blank" rel="noopener">iAmAileen ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-changdeokgung">
+      <div class="emoji">🍁</div>
+      <div><b>Changdeokgung Secret Garden</b>
+      <p class="gwhy">💬 Repeat visitors rank it above Gyeongbokgung — the guided garden tour is the difference.</p>
+      <ul class="gtips">
+        <li>Book the Secret Garden tour online ahead — limited daily tickets, sells out</li>
+        <li>CLOSED MONDAYS · Anguk Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://heyroseanne.com/autumn-in-seoul/" target="_blank" rel="noopener">Hey Roseanne ↗</a> · <a href="https://www.resetera.com/threads/korea-era-im-going-to-seoul-in-a-few-days.133545/" target="_blank" rel="noopener">ResetEra thread ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-bukchon">
+      <div class="emoji">🏘️</div>
+      <div><b>Bukchon Hanok Village (go early)</b>
+      <p class="gwhy">💬 The postcard Seoul — travelers say it's worth it only if you beat the tour buses.</p>
+      <ul class="gtips">
+        <li>Before 9 AM; combine with Gyeongbokgung the same morning</li>
+        <li>Anguk Station · free</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@dg_travel/video/7601106198431141142" target="_blank" rel="noopener">TikTok ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-eunpyeong">
+      <div class="emoji">⛰️</div>
+      <div><b>Eunpyeong Hanok Village</b>
+      <p class="gwhy">💬 All of Bukchon's charm with a fraction of the tourists — the photo spot without the elbows.</p>
+      <ul class="gtips">
+        <li>Afternoon; Café 1in1jan's rooftop terrace for the view</li>
+        <li>Further out (Gupabal/Bulgwang area) — allow transit time</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@mataharidharma/video/7543374673166224662" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://www.lemon8-app.com/experience/unexplored-destinations-in-seoul?region=sg" target="_blank" rel="noopener">Lemon8 ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-ikseon-dong">
+      <div class="emoji">☕</div>
+      <div><b>Ikseon-dong + Seosulla-gil</b>
+      <p class="gwhy">💬 Old hanoks turned into the city's best cafe-hopping lanes — morning steamed bread at Mil Toast, evening streetside drinking on Seosulla-gil.</p>
+      <ul class="gtips">
+        <li>Shops wake up ~11 AM; evenings liveliest</li>
+        <li>Jongno 3-ga Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://noticiasenvivo.cl/why-this-seoul-neighbourhood-is-the-coolest-in-the-world-in-2026-canada-reviews/" target="_blank" rel="noopener">2026 coolest neighbourhoods ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-hongdae">
+      <div class="emoji">🎶</div>
+      <div><b>Hongdae after dark</b>
+      <p class="gwhy">💬 It's where Seoul goes out — travelers consistently call it the fun zone, day and night.</p>
+      <ul class="gtips">
+        <li>NB1/NB2 are the famous hip-hop/R&amp;B clubs — entry usually includes drink tickets; bring passport/ID</li>
+        <li>Saturday Free Market (Mar–Nov) at Hongik Children's Park</li>
+        <li>Hongik Univ. Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@mataharidharma/video/7543374673166224662" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://www.lemon8-app.com/experience/korean-nightlife-guide?region=sg" target="_blank" rel="noopener">Nightlife guide ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-seongsu">
+      <div class="emoji">🏭</div>
+      <div><b>Seongsu-dong</b>
+      <p class="gwhy">💬 The contrarian pick that keeps winning — industrial-cool without the tourist crush.</p>
+      <ul class="gtips">
+        <li>Afternoon café-hopping; Seoul Forest is a short walk away</li>
+        <li>Seongsu Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@christinajotravels/video/7507030502365416746" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://www.youtube.com/watch?v=R07n3Y_9hvE" target="_blank" rel="noopener">YouTube ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-cheonggyecheon">
+      <div class="emoji">💧</div>
+      <div><b>Cheonggyecheon Stream evening walk</b>
+      <p class="gwhy">💬 A calm, lit-up reset between the hectic stops — and it's free.</p>
+      <ul class="gtips">
+        <li>Evenings; slots between Myeongdong and Gyeongbokgung</li>
+        <li>Don't expect the old lantern festival — it moved to December/Gwanghwamun</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@mataharidharma/video/7543374673166224662" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://en.wikipedia.org/wiki/Seoul_Lantern_Festival" target="_blank" rel="noopener">Wikipedia ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-n-tower">
+      <div class="emoji">🗼</div>
+      <div><b>N Seoul Tower (Namsan)</b>
+      <p class="gwhy">💬 "Iconic city views, especially magical at sunset" — and the Namsan walk itself is free with late-autumn foliage.</p>
+      <ul class="gtips">
+        <li>Sunset timing; cable-car lines get long on weekends</li>
+        <li>Hike up free, pay only if you want the observatory</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://heyroseanne.com/autumn-in-seoul/" target="_blank" rel="noopener">Hey Roseanne ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-seoul-forest">
+      <div class="emoji">🌳</div>
+      <div><b>Seoul Forest</b>
+      <p class="gwhy">💬 The park locals actually go to — autumn avenues without the palace crowds.</p>
+      <ul class="gtips">
+        <li>Daytime; combine with Seongsu-dong</li>
+        <li>Seoul Forest Station · free</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://heyroseanne.com/autumn-in-seoul/" target="_blank" rel="noopener">Hey Roseanne ↗</a> · <a href="https://www.youtube.com/watch?v=R07n3Y_9hvE" target="_blank" rel="noopener">YouTube ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-nodeul">
+      <div class="emoji">🌅</div>
+      <div><b>Nodeul Island sunset</b>
+      <p class="gwhy">💬 Travelers who found it say it's the Han River done right — sunset without the crowds.</p>
+      <ul class="gtips">
+        <li>Late afternoon for sunset · Nodeul Station · free</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@christinajotravels/video/7507030502365416746" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://www.lemon8-app.com/experience/unexplored-destinations-in-seoul?region=sg" target="_blank" rel="noopener">Lemon8 ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-hangang">
+      <div class="emoji">🌉</div>
+      <div><b>Hangang (Han River) parks</b>
+      <p class="gwhy">💬 The classic Seoul evening — a convenience-store picnic by the river is practically a rite of passage.</p>
+      <ul class="gtips">
+        <li>Yeouido for skyline views; convenience-store picnic is the move</li>
+        <li>If you want quieter: Nodeul Island (see above)</li>
+      </ul></div>
+    </div>
+    <div class="card gcard" id="g-gyeongui-bread">
+      <div class="emoji">🍞</div>
+      <div><b>Gyeongui Line Forest Park + salt bread</b>
+      <p class="gwhy">💬 It's the specific bakery pilgrimage TikTok sends everyone on — salt bread worth the line.</p>
+      <ul class="gtips">
+        <li>Daytime stroll · Hongik Univ. Station area</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@mataharidharma/video/7543374673166224662" target="_blank" rel="noopener">TikTok ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-sauna">
+      <div class="emoji">♨️</div>
+      <div><b>Jjimjilbang (Korean sauna)</b>
+      <p class="gwhy">💬 Backpacker guides call it the essential Korean experience — hot baths, saunas, and nap rooms under one roof.</p>
+      <ul class="gtips">
+        <li>Aquafield ~₩25,000 (10 AM–10 PM); book on Klook/Trazy for discounts</li>
+        <li>Hongdae Bulgama Sauna: 24h, budget-friendly, 5 min from Hongdae Entrance Stn Exit 4</li>
+        <li>Bathing areas are nude and gender-separated; dry saunas co-ed in provided clothes — towels/uniforms provided</li>
+        <li>⚠️ Dragon Hill Spa is closed — ignore old blog lists that still name it</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.trendpicker.net/2026/09/no-korean-apps-heres-how-to-find.html" target="_blank" rel="noopener">TrendPicker 2026 guide ↗</a> · <a href="https://creatrip.com/en/blog/347/Korean-Jjimjilbang-Korean-Sauna-Recommendations" target="_blank" rel="noopener">Creatrip ↗</a> · <a href="https://www.trazy.com/experience/detail/aquafield-goyang-hanam-discount-ticket" target="_blank" rel="noopener">Trazy ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-noraebang">
+      <div class="emoji">🎤</div>
+      <div><b>Coin noraebang (karaoke)</b>
+      <p class="gwhy">💬 The default Korean night-out move — private room, no audience, cheap.</p>
+      <ul class="gtips">
+        <li>Look for 코인노래방 signs; no booking needed</li>
+        <li>Hongdae has the most options</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.cityunscripted.com/travel-magazine/things-to-do-in-seoul-november" target="_blank" rel="noopener">November guide ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-dongdaemun">
+      <div class="emoji">🛍️</div>
+      <div><b>Dongdaemun + DDP (+ Namdaemun)</b>
+      <p class="gwhy">💬 The only major shopping district that truly comes alive after midnight — travelers love the night-market energy.</p>
+      <ul class="gtips">
+        <li>Dongdaemun: Thursday-night slot</li>
+        <li>Namdaemun (daytime): "a glimpse into local life" and the best cheap souvenirs</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lemon8-app.com/experience/is-7-days-in-korea-enough?region=sg" target="_blank" rel="noopener">Lemon8 ↗</a> · <a href="https://www.lemon8-app.com/experience/clarissaacindy/7159961355846418945" target="_blank" rel="noopener">Lemon8 ↗</a></p></div>
+    </div>
+
+    <div class="rec-city">🇰🇷 Incheon <span class="rec-when">· Nov 27 — airport day</span></div>
+    <div class="card gcard" id="g-chinatown">
+      <div class="emoji">🏮</div>
+      <div><b>Incheon Chinatown</b>
+      <p class="gwhy">💬 Korea's first and only official Chinatown (est. 1884) — reviewers call it "a nice stroll to kill a few hours" with great photo spots.</p>
+      <ul class="gtips">
+        <li>Best morning/early afternoon — avoid 2–4:30 PM when many shops take a break</li>
+        <li>Jajangmyeon ~₩8,000–12,000/bowl; street snacks ₩2,000–5,000</li>
+        <li>Right across from Incheon Station (Line 1) · budget ~1.5–2 hrs</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.airial.travel/attractions/south-korea/incheon-chinatown-VghS89Pn" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-fairytale-village">
+      <div class="emoji">🧚</div>
+      <div><b>Songwol-dong Fairytale Village</b>
+      <p class="gwhy">💬 Visitors love the photo ops — the best murals hide in the side alleys, not the main street.</p>
+      <ul class="gtips">
+        <li>Free · go after 10 AM (nothing open earlier); ~45–60 min</li>
+        <li>5-min walk from Incheon Station Exit 2 · pairs with Chinatown</li>
+        <li>Respect residents — keep voices down</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://polyglotpetra.com/a-day-in-incheon-itinerary/" target="_blank" rel="noopener">Polyglot Petra ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-sinpo-market">
+      <div class="emoji">🍗</div>
+      <div><b>Sinpo International Market</b>
+      <p class="gwhy">💬 The bucket of dakgangjeong split three ways (~₩6k each) is the best-value lunch in Incheon.</p>
+      <ul class="gtips">
+        <li>Go AFTER 2 PM — most stalls aren't open earlier</li>
+        <li>~₩17,000/bucket · Dongincheon Station (Line 1), Exit 2 · ~1 hr</li>
+        <li>Also: sinpo-dumplings, tteokbokki, hotbar fish-cake skewers</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.triphobo.com/places/incheon-south-korea/sinpo-international-market" target="_blank" rel="noopener">Triphobo ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-jajang-museum">
+      <div class="emoji">🏛️</div>
+      <div><b>Jajangmyeon Museum</b>
+      <p class="gwhy">💬 Tiny, cheap, and right in Chinatown — the perfect 30-minute appetizer before lunch.</p>
+      <ul class="gtips">
+        <li>₩1,000 admission · 9 AM–6 PM, closed Mondays</li>
+        <li>~30 min · pair with Chinatown lunch</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tripadvisor.co.nz/Attractions-g297889-Activities-zft11309-Incheon.html" target="_blank" rel="noopener">TripAdvisor ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-open-port">
+      <div class="emoji">⚓</div>
+      <div><b>Incheon Open Port Area</b>
+      <p class="gwhy">💬 History buffs call it Incheon's most interesting cluster — three cultures' architecture on a few walkable streets.</p>
+      <ul class="gtips">
+        <li>Jemulpo Club: free, 9:30 AM–5:30 PM, closed Mon · Open Port Museum: ₩500</li>
+        <li>Samgukji Mural Street: 77 tiled murals, free, outdoors</li>
+        <li>Budget ~1.5–2 hrs for the cluster</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://polyglotpetra.com/a-day-in-incheon-itinerary/" target="_blank" rel="noopener">Polyglot Petra ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-jayu-park">
+      <div class="emoji">🌳</div>
+      <div><b>Jayu Park (Freedom Park)</b>
+      <p class="gwhy">💬 The viewpoint pavilion over the coast is the quiet payoff after the old-town walking loop.</p>
+      <ul class="gtips">
+        <li>Free, open 24 hours · late afternoon for coastal light</li>
+        <li>~30–45 min · uphill from Jemulpo Club</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://polyglotpetra.com/a-day-in-incheon-itinerary/" target="_blank" rel="noopener">Polyglot Petra ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-songdo">
+      <div class="emoji">🛶</div>
+      <div><b>Songdo Central Park</b>
+      <p class="gwhy">💬 TripAdvisor's #1 cheap thing to do in Incheon (4.4, 673 reviews) — visitors love the boat rides with the skyline reflecting off the water.</p>
+      <ul class="gtips">
+        <li>Free entry; water-taxi rides inexpensive, pay on site · best at golden hour</li>
+        <li>Incheon Subway Line 1 → Central Park Station · ~1–1.5 hrs</li>
+        <li>G-Tower is a 7-min walk away — do both</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tripadvisor.co.nz/Attractions-g297889-Activities-zft11309-Incheon.html" target="_blank" rel="noopener">TripAdvisor ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-g-tower">
+      <div class="emoji">🔭</div>
+      <div><b>G-Tower Observatory</b>
+      <p class="gwhy">💬 A free observatory with 4.5 stars — travelers say the sunset views rival paid towers.</p>
+      <ul class="gtips">
+        <li>FREE admission · Tue–Fri 10 AM–9 PM (Nov 27 is Friday — fine)</li>
+        <li>29th-floor Sky Garden + AI exhibits are a bonus · ~30–45 min</li>
+        <li>7-min walk from Central Park Station Exit 3</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://wanderlog.com/place/details/117407/ifez-g-tower-incheon" target="_blank" rel="noopener">Wanderlog ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-wolmido">
+      <div class="emoji">🎡</div>
+      <div><b>Wolmido boardwalk</b>
+      <p class="gwhy">💬 The Viking ride and Disco Pang Pang are pure retro Korea — "more fun to watch than ride," per reviewers.</p>
+      <ul class="gtips">
+        <li>Rides paid individually (a few thousand won each) · afternoon is liveliest</li>
+        <li>Budget tip: seafood spots by the park are overpriced — walk a few blocks away; chicken skewers + tanghulu from stalls are the safe bets</li>
+        <li>~1.5–2 hrs · bus or Wolmi Sea Train from Incheon Station</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tripadvisor.co.nz/Attraction_Review-g297889-d2194162-Reviews-Wolmido-Incheon.html" target="_blank" rel="noopener">TripAdvisor ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-rail-bike">
+      <div class="emoji">🚲</div>
+      <div><b>Yeongjong Seaside Rail Bike</b>
+      <p class="gwhy">💬 TikTok/Reddit tips call it the unique active experience — and it's minutes from ICN, so it fits the final slot perfectly.</p>
+      <ul class="gtips">
+        <li>Best at late-afternoon golden hour; dress warm (wind/chill in late Nov)</li>
+        <li>Tickets sold on-site (price unverified — check before going)</li>
+        <li>~1 hr + 20–30 min to ICN by taxi/bus · store luggage via the Bounce app if needed</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://airial.travel/attractions/south-korea/yeongjong-seaside-rail-bike-incheon-j_d5AhQo" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+
+    <div class="rec-city">🇯🇵 Tokyo <span class="rec-when">· Nov 27 – Dec 5</span></div>
+    <div class="card gcard" id="g-rikugien">
+      <div class="emoji">🍁</div>
+      <div><b>Rikugien Garden night illuminations</b><span class="dates-tag">Nov 25 – Dec 6</span>
+      <p class="gwhy">💬 The night illuminations are the autumn event Tokyoites themselves go to — the garden's maples lit up after dark are unreal.</p>
+      <ul class="gtips">
+        <li>6–8:30 PM · go on a weeknight to dodge crowds</li>
+        <li>Easy JR Yamanote Line access</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://soranews24.com/2026/09/09/tokyos-rikugien-garden-announces-nighttime-foliage-illumination-event-ahead-of-autumn/" target="_blank" rel="noopener">SoraNews24 ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-keyakizaka">
+      <div class="emoji">💡</div>
+      <div><b>Roppongi Hills Keyakizaka Illumination</b><span class="dates-tag">~Nov 4 – Dec 25</span>
+      <p class="gwhy">💬 It's the photo every Tokyo winter guide opens with — and it's free.</p>
+      <ul class="gtips">
+        <li>Free · 5–11 PM</li>
+        <li>The Louis Vuitton bridge viewpoint is the shot</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tokyolocalized.com/post/tokyo-winter-illumination-2025-2026" target="_blank" rel="noopener">Tokyo Localized ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-marunouchi">
+      <div class="emoji">🥂</div>
+      <div><b>Marunouchi Naka-dori Illumination</b><span class="dates-tag">~Nov 13 – Feb 15</span>
+      <p class="gwhy">💬 Travelers call it the classy one — golden trees instead of neon, right by Tokyo Station.</p>
+      <ul class="gtips">
+        <li>Free · 4–11 PM · runs into February</li>
+        <li>Pairs with a Tokyo Station / Kitte rooftop evening</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tokyolocalized.com/post/tokyo-winter-illumination-2025-2026" target="_blank" rel="noopener">Tokyo Localized ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-blue-cave">
+      <div class="emoji">🔵</div>
+      <div><b>Shibuya Blue Cave (Ao no Dokutsu)</b><span class="dates-tag">~Dec 4 – 25</span>
+      <p class="gwhy">💬 It opens right in the middle of your Tokyo stay — a brand-new-for-you illumination few early visitors catch.</p>
+      <ul class="gtips">
+        <li>Free · 5–10 PM · extremely crowded on weekends — go weeknight</li>
+        <li>Recheck 2026 dates in late October</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tokyolocalized.com/post/tokyo-winter-illumination-2025-2026" target="_blank" rel="noopener">Tokyo Localized ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-midtown-rink">
+      <div class="emoji">⛸️</div>
+      <div><b>Tokyo Midtown Starlight Garden + ice rink</b><span class="dates-tag">~Nov 13 – Dec 25</span>
+      <p class="gwhy">💬 The rink-under-the-lights is the group activity version of illuminations — skating &gt; just looking.</p>
+      <ul class="gtips">
+        <li>Illumination free; rink charges skate rental</li>
+        <li>~Nov 13–Dec 25</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tokyolocalized.com/post/tokyo-winter-illumination-2025-2026" target="_blank" rel="noopener">Tokyo Localized ↗</a> · <a href="https://www.airial.travel/categories/japan/tokyo/things-to-do-in-tokyo-in-winter-Toc2DbuQ" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-azabudai-market">
+      <div class="emoji">🎄</div>
+      <div><b>Azabudai Hills Christmas Market</b><span class="dates-tag">~Nov 22 – Dec 25</span>
+      <p class="gwhy">💬 The insider Christmas market — all the glühwein vibes without the Shin-Toyosu crowds.</p>
+      <ul class="gtips">
+        <li>Free entry · ~Nov 22–Dec 25</li>
+        <li>Combine with Roppongi Hills illuminations (nearby)</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.airial.travel/categories/japan/tokyo/free-things-to-do-in-tokyo-YeH-zh6w" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-yomiuriland">
+      <div class="emoji">🎢</div>
+      <div><b>Yomiuriland Jewellumination</b><span class="dates-tag">~Oct 23 – Apr 5</span>
+      <p class="gwhy">💬 Reddit calls it jaw-dropping — an amusement park wired with millions of LEDs is peak Japan.</p>
+      <ul class="gtips">
+        <li>¥1,800 · 4–10:30 PM · 35–45 min from Shinjuku</li>
+        <li>Ride the coaster through the lights if you do one thing</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tokyolocalized.com/post/tokyo-winter-illumination-2025-2026" target="_blank" rel="noopener">Tokyo Localized ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-shin-xmas-market">
+      <div class="emoji">🍷</div>
+      <div><b>Tokyo Christmas Market @ Shin-Toyosu</b><span class="dates-tag">Nov 20 – Dec 25</span>
+      <p class="gwhy">💬 It's THE Tokyo Christmas market — the 2026 edition is at a brand-new waterfront venue.</p>
+      <ul class="gtips">
+        <li>¥1,000–2,000 entry · Nov 20–Dec 25</li>
+        <li>Evenings for the full vibe</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://tokyocheapo.com/entertainment/christmas-markets-in-tokyo/" target="_blank" rel="noopener">Tokyo Cheapo ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-shiba-xmas">
+      <div class="emoji">🗼</div>
+      <div><b>Christmas Market @ Shiba Park</b><span class="dates-tag">Dec 4 – 25</span>
+      <p class="gwhy">💬 Christmas market WITH Tokyo Tower in the background — the twofer evening.</p>
+      <ul class="gtips">
+        <li>Dec 4–25 · combine with a Tokyo Tower night visit</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://tokyocheapo.com/entertainment/christmas-markets-in-tokyo/" target="_blank" rel="noopener">Tokyo Cheapo ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-ueno-advent">
+      <div class="emoji">🎅</div>
+      <div><b>Christmas Advent in Ueno Park</b><span class="dates-tag">Nov 19 – Dec 25</span>
+      <p class="gwhy">💬 Free entry and brand-new for 2026 — 150 international Santas is delightfully weird.</p>
+      <ul class="gtips">
+        <li>Free · Nov 19–Dec 25 · pairs with Ueno/Ameyoko</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://tokyocheapo.com/entertainment/christmas-markets-in-tokyo/" target="_blank" rel="noopener">Tokyo Cheapo ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-yokohama-xmas">
+      <div class="emoji">🧱</div>
+      <div><b>Yokohama Red Brick Christmas Market</b><span class="dates-tag">from Nov 21</span>
+      <p class="gwhy">💬 The market + harbor lights + Chinatown combo makes Yokohama the best evening half-trip.</p>
+      <ul class="gtips">
+        <li>From Nov 21 · 30 min by train from Tokyo</li>
+        <li>Do Chinatown dinner + market + lights in one evening</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.snowmonkeyresorts.com/news/tokyo-in-december/" target="_blank" rel="noopener">Snow Monkey Resorts ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-meiji-xmas">
+      <div class="emoji">⛪</div>
+      <div><b>Meiji Jingu Gaien Christmas Market</b><span class="dates-tag">from Nov 21</span>
+      <p class="gwhy">💬 Christmas market + golden ginkgo avenue in the same place — November's best combo.</p>
+      <ul class="gtips">
+        <li>From Nov 21 · pairs with the ginkgo avenue (peak late Nov)</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.snowmonkeyresorts.com/news/tokyo-in-december/" target="_blank" rel="noopener">Snow Monkey Resorts ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-shibuya-sky">
+      <div class="emoji">🌇</div>
+      <div><b>Shibuya Sky</b>
+      <p class="gwhy">💬 First-timers consistently rank it above Skytree and Tokyo Tower — the open-air sunset is the thing.</p>
+      <ul class="gtips">
+        <li>~¥2,000–2,500 (cheaper online) · SUNSET SLOTS SELL OUT WEEKS AHEAD — book now</li>
+        <li>Weather-dependent: roof closes in rain/wind</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://medium.com/@kokorounfolded/tokyo-tower-vs-skytree-vs-shibuya-sky-which-one-actually-deserves-your-time-7d9655ef6097" target="_blank" rel="noopener">Medium ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-tokyo-tower">
+      <div class="emoji">🗼</div>
+      <div><b>Tokyo Tower (Main Deck)</b>
+      <p class="gwhy">💬 Half the price of Shibuya Sky, zero booking stress, and the icon itself.</p>
+      <ul class="gtips">
+        <li>~¥1,200–1,500 · no advance booking needed</li>
+        <li>Best at night when lit · pairs with Shiba Park Christmas market</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://medium.com/@kokorounfolded/tokyo-tower-vs-skytree-vs-shibuya-sky-which-one-actually-deserves-your-time-7d9655ef6097" target="_blank" rel="noopener">Medium ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-tmgb">
+      <div class="emoji">🏙️</div>
+      <div><b>Tokyo Metro Gov Building (FREE observatory)</b>
+      <p class="gwhy">💬 A free observatory AND a free light show — travelers call it the best free night in Tokyo.</p>
+      <ul class="gtips">
+        <li>Free · projection mapping 7–9:30 PM</li>
+        <li>Shinjuku · no booking</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@japantravelbasics/video/7624399241728855317" target="_blank" rel="noopener">TikTok ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-shinjuku-gyoen">
+      <div class="emoji">🍂</div>
+      <div><b>Shinjuku Gyoen</b>
+      <p class="gwhy">💬 Tokyo's best central park for late-autumn color — and it's ¥500.</p>
+      <ul class="gtips">
+        <li>¥500 entry · CLOSED MONDAYS</li>
+        <li>Early December = last maples + golden ginkgos</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lonelyjapan.com/99924/" target="_blank" rel="noopener">Lonely Japan ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-ginkgo-avenue">
+      <div class="emoji">🌟</div>
+      <div><b>Meiji Jingu Gaien ginkgo avenue</b><span class="dates-tag">peak late Nov</span>
+      <p class="gwhy">💬 Peak gold hits during your trip — it's the single most-photographed autumn spot in Tokyo.</p>
+      <ul class="gtips">
+        <li>Peak late Nov · weekday morning to dodge crowds</li>
+        <li>Pair with the Gaien Christmas market (from Nov 21)</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.airial.travel/attractions/japan/minato-city/meiji-jingu-gaien-ginkgo-avenue-tokyo-EVwh356R" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-takao">
+      <div class="emoji">🥾</div>
+      <div><b>Mt. Takao (day trip)</b>
+      <p class="gwhy">💬 The nature break without the Hakone price tag — easy trails, cable car, temple at the top.</p>
+      <ul class="gtips">
+        <li>~50 min from central Tokyo · cable car if you don't want to hike</li>
+        <li>Autumn leaves festival season</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@koimorijp/photo/7629579443878645012" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://www.airial.travel/categories/japan/tokyo/things-to-do-in-tokyo-in-fall-oPqf-6r1" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-asakusa">
+      <div class="emoji">⛩️</div>
+      <div><b>Asakusa / Senso-ji (early morning)</b>
+      <p class="gwhy">💬 Senso-ji at 7 AM with no crowds is a different temple than Senso-ji at noon.</p>
+      <ul class="gtips">
+        <li>Go before 9 AM · Nakamise snacks after</li>
+        <li>Pairs with a Sumida river walk toward Skytree</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.airial.travel/categories/japan/tokyo/things-to-do-in-tokyo-in-fall-oPqf-6r1" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-yanaka">
+      <div class="emoji">🐱</div>
+      <div><b>Yanaka Ginza</b>
+      <p class="gwhy">💬 Old Tokyo that dodged the earthquakes and the bombs — travelers love how un-Tokyo it feels.</p>
+      <ul class="gtips">
+        <li>Weekday — many shops close Sundays</li>
+        <li>SCAI the Bathhouse gallery in a 200-year-old bathhouse</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://medium.com/@otsukarejapan/tokyos-hidden-gems-3-must-visit-places-locals-actually-recommend-from-a-tokyo-native-3e33fa0a2ace" target="_blank" rel="noopener">Medium ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-shimokitazawa">
+      <div class="emoji">👕</div>
+      <div><b>Shimokitazawa</b>
+      <p class="gwhy">💬 Tokyo's vintage capital — the afternoon browse between bigger sights.</p>
+      <ul class="gtips">
+        <li>Afternoon · vintage shops + live houses</li>
+        <li>Easy add-on to a Shibuya day</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://medium.com/@insight_stack/hidden-tokyo-5-neighborhoods-tourists-rarely-visit-f48d7b100691" target="_blank" rel="noopener">Medium ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-koenji">
+      <div class="emoji">🎸</div>
+      <div><b>Koenji</b>
+      <p class="gwhy">💬 All the vintage, half the tourists — the deeper cut for the second Tokyo trip... or the first, if you're cool.</p>
+      <ul class="gtips">
+        <li>Evenings for live houses · cheaper eats than Shimokita</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lemon8-app.com/@hollyj0llly/7372203349346959889?region=sg" target="_blank" rel="noopener">Lemon8 ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-kichijoji">
+      <div class="emoji">🦢</div>
+      <div><b>Kichijoji + Inokashira Park</b>
+      <p class="gwhy">💬 The neighborhood Tokyoites wish they lived in — chill in a way central Tokyo isn't.</p>
+      <ul class="gtips">
+        <li>Park boating (swan boats!) · great for a slow afternoon</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.airial.travel/categories/japan/tokyo/things-to-do-in-tokyo-in-winter-Toc2DbuQ" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-ueno-ameyoko">
+      <div class="emoji">🏮</div>
+      <div><b>Ueno / Ameyoko</b>
+      <p class="gwhy">💬 The sensory-overload market street — cheap eats and people-watching for free.</p>
+      <ul class="gtips">
+        <li>Daytime · pairs with Ueno Park museums or the Christmas Advent market</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@japantravelbasics/video/7624399241728855317" target="_blank" rel="noopener">TikTok ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-tsukiji">
+      <div class="emoji">🍣</div>
+      <div><b>Tsukiji Outer Market (early morning)</b>
+      <p class="gwhy">💬 The legendary breakfast market — if you go early. If you go late, it's a cautionary tale.</p>
+      <ul class="gtips">
+        <li>BEFORE 9 AM or don't bother</li>
+        <li>Tuna sashimi + grilled scallops for breakfast</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lonelyjapan.com/98751/" target="_blank" rel="noopener">Lonely Japan ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-depachika">
+      <div class="emoji">🍱</div>
+      <div><b>Depachika (dept-store food halls)</b>
+      <p class="gwhy">💬 Travelers call it the cheat code — department-store basement food at convenience-store prices (especially before closing).</p>
+      <ul class="gtips">
+        <li>Go ~30 min before closing for discount stickers</li>
+        <li>Isetan Shinjuku is the famous one; every major station has one</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lonelyjapan.com/98751/" target="_blank" rel="noopener">Lonely Japan ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-ichiran">
+      <div class="emoji">🍜</div>
+      <div><b>Ichiran Ramen</b>
+      <p class="gwhy">💬 The ramen baseline every Tokyo trip needs — private booths, zero Japanese required.</p>
+      <ul class="gtips">
+        <li>Go early to beat lines · ~¥1,000/bowl</li>
+        <li>24h locations exist for late-night ramen</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lonelyjapan.com/98751/" target="_blank" rel="noopener">Lonely Japan ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-monjayaki">
+      <div class="emoji">🥘</div>
+      <div><b>Monjayaki on Monja Street, Tsukishima</b>
+      <p class="gwhy">💬 Osaka has okonomiyaki; Tokyo has monjayaki — and cooking it yourselves is half the fun.</p>
+      <ul class="gtips">
+        <li>Lunch lines — go early or off-peak</li>
+        <li>Tsukishima · fun for 3 people</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.lonelyjapan.com/39562/" target="_blank" rel="noopener">Lonely Japan ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-omoide-goldengai">
+      <div class="emoji">🍶</div>
+      <div><b>Omoide Yokocho + Golden Gai</b>
+      <p class="gwhy">💬 The Tokyo night everyone pictures — smoke, lanterns, bars that fit six people.</p>
+      <ul class="gtips">
+        <li>Evenings in Shinjuku · Golden Gai bars often have a cover charge — check before sitting</li>
+        <li>Omoide Yokocho for yakitori first, Golden Gai after</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@japantravelbasics/video/7624399241728855317" target="_blank" rel="noopener">TikTok ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-sumo">
+      <div class="emoji">🤼</div>
+      <div><b>Sumo morning practice (asageiko)</b>
+      <p class="gwhy">💬 Watching 300-lb wrestlers train at 8 AM in total silence is the most intense quiet you'll experience in Tokyo.</p>
+      <ul class="gtips">
+        <li>Guided tours ~$100/person · strict silence etiquette</li>
+        <li>Book ahead — slots are limited</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.viator.com/en-HK/tours/Tokyo/Watch-Sumo-Morning-Practice-at-a-Sumo-Stable-in-Tokyo/d334-13441P10" target="_blank" rel="noopener">Viator ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-karaoke">
+      <div class="emoji">🎤</div>
+      <div><b>Karaoke Kan (private-room karaoke)</b>
+      <p class="gwhy">💬 Private room, all-you-can-drink plans, open till 5 AM — the Tokyo night out that never fails.</p>
+      <ul class="gtips">
+        <li>Late-night free-time/nomihoudai deals are the value play</li>
+        <li>Locations everywhere; no booking needed on weeknights</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.airial.travel/categories/japan/tokyo/things-to-do-in-tokyo-at-night-FD-22XOR" target="_blank" rel="noopener">Airial ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-arcades">
+      <div class="emoji">🕹️</div>
+      <div><b>Arcades: Taito Station / Round1 / Super Potato</b>
+      <p class="gwhy">💬 The rainy-day / late-night filler that somehow becomes a core memory.</p>
+      <ul class="gtips">
+        <li>Round1: bowling + karaoke + arcade in one building, some 24h</li>
+        <li>Super Potato (Akihabara) for retro game hunting</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.airial.travel/categories/japan/tokyo/things-to-do-in-tokyo-at-night-FD-22XOR" target="_blank" rel="noopener">Airial ↗</a> · <a href="https://www.lonelyjapan.com/98751/" target="_blank" rel="noopener">Lonely Japan ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-gokart">
+      <div class="emoji">🏎️</div>
+      <div><b>Street go-karting</b>
+      <p class="gwhy">💬 Driving a go-kart past the Shibuya Scramble is the story you'll tell for years.</p>
+      <ul class="gtips">
+        <li>REQUIRES an international driving permit — sort before you fly</li>
+        <li>Cheap providers book out a month+ ahead — reserve early</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://tokyocheapo.com/entertainment/" target="_blank" rel="noopener">Tokyo Cheapo ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-toyosu-onsen">
+      <div class="emoji">♨️</div>
+      <div><b>Toyosu Senkyaku Banrai + Manyo Club onsen</b>
+      <p class="gwhy">💬 Onsen + Edo-period food street in one stop — and it pairs with teamLab Planets, same area.</p>
+      <ul class="gtips">
+        <li>~¥4,000 · 24 hours · rooftop foot bath is free</li>
+        <li>Pair with teamLab Planets (Toyosu area)</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.tiktok.com/@thefoodinbox/video/7480804851874680072" target="_blank" rel="noopener">TikTok ↗</a> · <a href="https://Wanderlog.com/place/details/8741681" target="_blank" rel="noopener">Wanderlog ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-kamakura">
+      <div class="emoji">⛩️</div>
+      <div><b>Day trip: Kamakura + Enoshima</b>
+      <p class="gwhy">💬 The classic Tokyo day trip — Great Buddha by day, island lights by night.</p>
+      <ul class="gtips">
+        <li>~1 hr from central Tokyo</li>
+        <li>Stay for Enoshima's night illuminations (Jewels of Shonan)</li>
+      </ul></div>
+    </div>
+    <div class="card gcard" id="g-jewels-shonan">
+      <div class="emoji">🌉</div>
+      <div><b>Enoshima "Jewels of Shonan"</b><span class="dates-tag">late Nov – Feb</span>
+      <p class="gwhy">💬 An entire island lit up for winter — the after-dark half of the Kamakura day trip.</p>
+      <ul class="gtips">
+        <li>Late Nov–Feb · Samuel Cocking Garden is the centerpiece</li>
+      </ul></div>
+    </div>
+    <div class="card gcard" id="g-hakone">
+      <div class="emoji">🗻</div>
+      <div><b>Day trip: Hakone</b>
+      <p class="gwhy">💬 Winter is Fuji season — the clearest views of the year, plus onsen in the cold.</p>
+      <ul class="gtips">
+        <li>~2 hrs via Odakyu Romancecar from Shinjuku</li>
+        <li>Open-air museum + Lake Ashi pirate ship + onsen</li>
+      </ul></div>
+    </div>
+    <div class="card gcard" id="g-nikko">
+      <div class="emoji">🏯</div>
+      <div><b>Day trip: Nikko</b>
+      <p class="gwhy">💬 The shrine complex is the most ornate in Japan — and early-winter dusting makes it otherworldly.</p>
+      <ul class="gtips">
+        <li>~2h via Tobu from Asakusa · All-Area Pass ~¥4,160 off-season</li>
+        <li>Cold — layer up</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.itimaker.com/blog/tokyo-day-trips-winter-reddit" target="_blank" rel="noopener">iTimaker ↗</a> · <a href="https://www.lonelyjapan.com/98751/" target="_blank" rel="noopener">Lonely Japan ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-kawaguchiko">
+      <div class="emoji">🗻</div>
+      <div><b>Day trip: Kawaguchiko / Mt. Fuji</b>
+      <p class="gwhy">💬 The postcard shot — pagoda + Fuji — is actually clearest in winter.</p>
+      <ul class="gtips">
+        <li>~2h from Shinjuku · Chureito Pagoda before 7 AM</li>
+        <li>Hoto noodles for lunch · weekday &gt; weekend</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.itimaker.com/blog/tokyo-day-trips-winter-reddit" target="_blank" rel="noopener">iTimaker ↗</a> · <a href="https://www.lemon8-app.com/experience/tokyo-day-trips-winter?region=sg" target="_blank" rel="noopener">Lemon8 ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-ashikaga">
+      <div class="emoji">✨</div>
+      <div><b>Ashikaga Flower Park "Garden of Light"</b><span class="dates-tag">~Late Oct – early Feb</span>
+      <p class="gwhy">💬 Five million lights on wisteria tunnels — the illumination that beats all the city ones.</p>
+      <ul class="gtips">
+        <li>~¥1,300 · ~80 min by train (Tochigi)</li>
+        <li>Arrive 30 min BEFORE sunset to watch the daylight→illumination transition</li>
+      </ul>
+      <p class="gsrc">Sources: <a href="https://www.itimaker.com/blog/tokyo-day-trips-winter-reddit" target="_blank" rel="noopener">iTimaker ↗</a></p></div>
+    </div>
+    <div class="card gcard" id="g-yokohama">
+      <div class="emoji">🏙️</div>
+      <div><b>Half day: Yokohama</b>
+      <p class="gwhy">💬 Three hits in one evening: market, harbor lights, Chinatown dinner.</p>
+      <ul class="gtips">
+        <li>30 min by train · do it as an evening trip</li>
+      </ul></div>
+    </div>
+    <div class="card gcard" id="g-teamlab">
+      <div class="emoji">💠</div>
+      <div><b>teamLab</b>
+      <p class="gwhy">💬 The museum everyone talks about — and it actually lives up to it.</p>
+      <ul class="gtips">
+        <li>Book online WEEKS ahead — sells out</li>
+        <li>Planets pairs with Toyosu onsen (same area)</li>
+      </ul></div>
+    </div>
+
+    <p style="margin-top:18px"><a href="#" onclick="backToRecs();return false;">← Back to recommendations</a></p>
   </section>
 
   <!-- BUDGET -->
@@ -525,6 +1597,30 @@
       btn.classList.add("active");
       document.getElementById("pane-" + btn.dataset.tab).classList.add("active");
     });
+  });
+
+  // Guide deep-links
+  function showTab(name){
+    document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".tabpane").forEach(p=>p.classList.remove("active"));
+    var btn=document.querySelector('.tab[data-tab="'+name+'"]');
+    if(btn) btn.classList.add("active");
+    document.getElementById("pane-"+name).classList.add("active");
+  }
+  function openGuide(slug){
+    showTab("guide");
+    var el=document.getElementById("g-"+slug);
+    if(el){
+      el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+      setTimeout(function(){el.scrollIntoView({behavior:"smooth",block:"start"});},80);
+    } else {
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+  }
+  function backToRecs(){ showTab("recs"); window.scrollTo({top:0,behavior:"smooth"}); }
+  document.addEventListener("click",function(e){
+    var c=e.target.closest("[data-guide]");
+    if(c){ openGuide(c.getAttribute("data-guide")); }
   });
 
   // Countdown to departure (Nov 23, 2026, 00:30 ET)
