@@ -38,7 +38,8 @@
   }
 
   /* Tabs */
-  .tabs { overflow-x: auto; margin: 20px 0 24px; scrollbar-width: thin; }
+  .tabs { overflow-x: auto; margin: 20px 0 24px; scrollbar-width: none; -ms-overflow-style: none; }
+  .tabs::-webkit-scrollbar { display: none; }
   .tabs-inner {
     display: flex; gap: 2px; border-bottom: 2px solid var(--line);
     width: max-content; min-width: 100%;
