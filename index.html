@@ -1799,7 +1799,7 @@
   days.forEach(([wd, num, mo, city, note, isFlight, map, details], i) => {
     const div = document.createElement("div");
     div.className = "card day";
-    const hasDetails = (details && details.length > 0) || !!map;
+    const hasDetails = false; // activities hidden until plans firm up — detail data kept in the days array above for easy restore
     let open = false;
     try { open = hasDetails && localStorage.getItem("dayexp:" + i) === "1"; } catch (e) {}
     if (open) div.classList.add("expanded");
@@ -1861,10 +1861,6 @@
     showTab("itinerary");
     const card = host.children[i];
     if (!card) { window.scrollTo({top: 0, behavior: "smooth"}); return; }
-    card.classList.add("expanded");
-    const btn = card.querySelector(".day-head");
-    if (btn) btn.setAttribute("aria-expanded", "true");
-    try { localStorage.setItem("dayexp:" + i, "1"); } catch (err) {}
     card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
     setTimeout(function(){ card.scrollIntoView({behavior: "smooth", block: "center"}); }, 60);
   });
