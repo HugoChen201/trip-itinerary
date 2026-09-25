@@ -1788,7 +1788,7 @@
   // Itinerary days: [weekday, date, month, city, summary, isFlight, mapLink, detail bullets[]]
   const days = [
     ["Mon","23","Nov","Seoul","✈️ Departure day — JFK 12:30 AM (night of Sun Nov 22).", true, "", ["Asiana OZ223 nonstop · 15h 40m","Arrive ICN Tue 6:10 AM"]],
-    ["Tue","24","Nov","Seoul","Arrive + recover — easy first day around Myeongdong.", false, "", ["Land ICN 6:10 AM — transfer to hotel","Rest up from the red-eye","Myeongdong street food at night"]],
+    ["Tue","24","Nov","Seoul","Arrival day — Namsan morning hike, Myeongdong street food crawl at night.", false, "", ["6:10 AM land ICN → out by ~7:30 (immigration, bags, small currency exchange)","AREX Express to hotel ~9:00 — drop bags","9:30 breakfast","11:00 AM–12:00 PM Namsan hike","12:30 lunch — afternoon open (cafe / try early check-in)","3 PM check-in + rest","6:30–7 PM Myeongdong street food crawl","Early night — rest up for Day 2"]],
     ["Wed","25","Nov","Seoul","Palace day — Gyeongbokgung, Bukchon, Insadong.", false, "", ["Gyeongbokgung Palace + hanbok rental (free entry in hanbok)","Bukchon Hanok Village — go early to beat crowds","Insadong tea houses"]],
     ["Thu","26","Nov","Seoul","Open Seoul day — shopping wherever the mood strikes.", false, "", ["Hongdae: indie shops + street food by day, nightlife after dark","Myeongdong / Dongdaemun late-night shopping"]],
     ["Fri","27","Nov","Tokyo","✈️ Incheon: shopping + sightseeing, then fly ICN → HND.", true, "", ["Incheon: Chinatown, Fairytale Village, Sinpo Market","Be at ICN 5:30–6 PM","Korean Air KE751 · 8:40 PM → 10:50 PM"]],
@@ -1802,10 +1802,11 @@
     ["Sat","5","Dec","Home","✈️ Fly HND → JFK via ICN (arrives 9:00 AM).", true, "", ["Asiana OZ177 + OZ222 · 1:30 AM → 9:00 AM"]],
   ];
   const host = document.getElementById("days");
+  const FINALIZED_DAYS = new Set([1]); // day indexes with confirmed plans get expandable details
   days.forEach(([wd, num, mo, city, note, isFlight, map, details], i) => {
     const div = document.createElement("div");
     div.className = "card day";
-    const hasDetails = false; // activities hidden until plans firm up — detail data kept in the days array above for easy restore
+    const hasDetails = FINALIZED_DAYS.has(i); // only finalized days expand; other detail data stays in the array for easy restore
     let open = false;
     try { open = hasDetails && localStorage.getItem("dayexp:" + i) === "1"; } catch (e) {}
     if (open) div.classList.add("expanded");
