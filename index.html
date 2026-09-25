@@ -163,6 +163,9 @@
   .day.expanded .day-body { display: block; }
   .day-body ul { margin: 0; padding-left: 20px; }
   .day-body li { margin-bottom: 6px; }
+  .day-body ul.tl { list-style: none; padding-left: 0; }
+  .day-body ul.tl li { display: flex; gap: 12px; margin-bottom: 9px; align-items: baseline; }
+  .day-body .tt { flex: 0 0 118px; opacity: .6; font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .day-body .mapline { margin-top: 10px; }
 
   /* Wide tables scroll horizontally on small screens */
@@ -1788,7 +1791,7 @@
   // Itinerary days: [weekday, date, month, city, summary, isFlight, mapLink, detail bullets[]]
   const days = [
     ["Mon","23","Nov","Seoul","✈️ Departure day — JFK 12:30 AM (night of Sun Nov 22).", true, "", ["Asiana OZ223 nonstop · 15h 40m","Arrive ICN Tue 6:10 AM"]],
-    ["Tue","24","Nov","Seoul","Arrival day — Namsan morning hike, Myeongdong street food crawl at night.", false, "", ["6:10 AM land ICN → out by ~7:30 (immigration, bags, small currency exchange)","AREX Express to hotel ~9:00 — drop bags","9:30 breakfast","11:00 AM–12:00 PM Namsan hike","12:30 lunch — afternoon open (cafe / try early check-in)","3 PM check-in + rest","6:30–7 PM Myeongdong street food crawl","Early night — rest up for Day 2"]],
+    ["Tue","24","Nov","Seoul","Arrival day — Namsan morning hike, Myeongdong street food crawl at night.", false, "", ["6:10 AM|Land ICN → out by ~7:30 (immigration, bags, small currency exchange)","7:30 AM|AREX Express to hotel — drop bags (~9:00 AM)","9:30 AM|Breakfast","11:00 AM|Namsan hike (~1 hr)","12:30 PM|Lunch, then open afternoon (cafe / try early check-in)","3:00 PM|Check-in + rest","6:30 PM|Myeongdong street food crawl","Night|Back to hotel — rest up for Day 2"]],
     ["Wed","25","Nov","Seoul","Palace day — Gyeongbokgung, Bukchon, Insadong.", false, "", ["Gyeongbokgung Palace + hanbok rental (free entry in hanbok)","Bukchon Hanok Village — go early to beat crowds","Insadong tea houses"]],
     ["Thu","26","Nov","Seoul","Open Seoul day — shopping wherever the mood strikes.", false, "", ["Hongdae: indie shops + street food by day, nightlife after dark","Myeongdong / Dongdaemun late-night shopping"]],
     ["Fri","27","Nov","Tokyo","✈️ Incheon: shopping + sightseeing, then fly ICN → HND.", true, "", ["Incheon: Chinatown, Fairytale Village, Sinpo Market","Be at ICN 5:30–6 PM","Korean Air KE751 · 8:40 PM → 10:50 PM"]],
@@ -1819,10 +1822,17 @@
         </div>
         ${hasDetails ? '<span class="chev">▾</span>' : ""}
       </button>
-      ${hasDetails ? `<div class="day-body">
-        <ul>${details.map(d => `<li>${d}</li>`).join("")}</ul>
+      ${hasDetails ? (() => {
+        const isTL = details.length && details.every(d => d.includes("|"));
+        const lis = details.map(d => {
+          const p = d.indexOf("|");
+          return (isTL && p > -1) ? `<li><span class="tt">${d.slice(0, p)}</span><span>${d.slice(p + 1)}</span></li>` : `<li>${d}</li>`;
+        }).join("");
+        return `<div class="day-body">
+        <ul class="${isTL ? "tl" : ""}">${lis}</ul>
         ${map ? `<div class="mapline">🗺️ <a href="${map}" target="_blank" rel="noopener">Route map ↗</a></div>` : ""}
-      </div>` : ""}`;
+      </div>`;
+      })() : ""}`;
     if (hasDetails) {
       const btn = div.querySelector(".day-head");
       btn.addEventListener("click", () => {
