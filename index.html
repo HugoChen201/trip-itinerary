@@ -285,7 +285,7 @@
       <div class="card wx" id="wx-seoul"><b>Seoul</b><div class="wx-err">Loading…</div></div>
       <div class="card wx" id="wx-tokyo"><b>Tokyo</b><div class="wx-err">Loading…</div></div>
     </div>
-    <div class="wx-note" style="margin:-4px 0 18px">🌤️ Live forecast · refreshes every visit</div>
+    <div class="wx-note" id="wx-note" style="margin:-4px 0 18px">🌤️ Live forecast · refreshes every visit</div>
     <div id="days"></div>
     <h2>💡 Tips</h2>
     <div class="card">
@@ -1903,6 +1903,7 @@
   const WDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const TYPICAL = { seoul: [46, 30], tokyo: [57, 43] }; // typical [hi, lo] °F for the trip dates
   async function loadWeather() {
+    let tripMode = false;
     for (const ck of Object.keys(CITIES)) {
       const c = CITIES[ck], el = document.getElementById(c.el);
       try {
@@ -1917,7 +1918,17 @@
         });
         const now = Math.round(j.current.temperature_2m);
         const today = c.fc[j.daily.time[0]];
-        const week = j.daily.time.slice(0, 5).map(t => {
+        const tripCells = days
+          .filter(d => c.name === "Seoul" ? d[3] === "Seoul" : d[3] !== "Seoul")
+          .map(d => {
+            const iso = `2026-${d[2] === "Nov" ? "11" : "12"}-${String(d[1]).padStart(2, "0")}`;
+            const f = c.fc[iso];
+            if (!f) return "";
+            const M = d[2] === "Nov" ? 11 : 12;
+            return `<div class="wx-cell"><span class="wd">${d[0]} ${M}/${+d[1]}</span><b>${wmoji(f.code)}</b><span class="wt"><span class="hi">${f.hi}°</span>/${f.lo}°</span></div>`;
+          }).join("");
+        if (tripCells) tripMode = true;
+        const week = tripCells || j.daily.time.slice(0, 5).map(t => {
           const [Y, M, D] = t.split("-").map(Number);
           const f = c.fc[t];
           return `<div class="wx-cell"><span class="wd">${WDAYS[new Date(Y, M - 1, D).getDay()]} ${M}/${D}</span><b>${wmoji(f.code)}</b><span class="wt"><span class="hi">${f.hi}°</span>/${f.lo}°</span></div>`;
@@ -1931,6 +1942,8 @@
       }
     }
     paintCalendarWeather();
+    const cap = document.getElementById("wx-note");
+    if (cap) cap.textContent = tripMode ? "🌤️ Trip forecast · live, refreshes every visit" : "🌤️ 5-day outlook · live, refreshes every visit";
   }
   function paintCalendarWeather() {
     document.querySelectorAll("#calendars .dates span[data-date]").forEach(sp => {
