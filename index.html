@@ -113,6 +113,9 @@
   .dates span.blank { color: transparent; }
   .dates span.trip { background: var(--accent-soft); color: var(--accent-dark); font-weight: 700; }
   .dates span.flight { background: var(--accent); color: #fff; font-weight: 800; }
+  .dates span.daylink { cursor: pointer; }
+  .dates span.daylink:hover { box-shadow: inset 0 0 0 2px var(--accent); }
+  .day.flash { animation: gflash 1.8s ease; }
   .legend { display: flex; gap: 18px; margin-top: 14px; font-size: .85rem; color: var(--muted); flex-wrap: wrap; }
   .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 6px; vertical-align: baseline; }
 
@@ -158,6 +161,14 @@
 
   /* Wide tables scroll horizontally on small screens */
   .tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Spreadsheet embed */
+  .sheet-tools { display: flex; justify-content: flex-end; padding: 2px 4px 8px; }
+  .sheet-toggle { background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px; font: inherit; font-size: .85rem; font-weight: 600; cursor: pointer; }
+  .sheet-toggle:hover { border-color: var(--accent); }
+  #sheet-frame { width: 100%; height: min(640px, 78vh); border: 0; border-radius: 8px; background: #f2f2f2; }
+  #sheet-frame.dark { filter: invert(0.94) hue-rotate(180deg); background: #0e0e12; }
 
 
   /* Calendar weather badges */
@@ -1639,7 +1650,7 @@
     <p style="color:var(--muted);margin-top:-6px">Tap to check things off — your progress is saved on this device. Late-November Seoul is properly cold.</p>
     <div class="card">
       <div class="pack-cat">🧥 Clothing</div>
-        <label class="pack-item"><input type="checkbox" data-pack="pk0"><span>Warm winter coat <span>Seoul highs ~5°C</span></span></label>
+        <label class="pack-item"><input type="checkbox" data-pack="pk0"><span>Warm winter coat <span>Seoul highs ~41°F</span></span></label>
         <label class="pack-item"><input type="checkbox" data-pack="pk1"><span>Sweaters / fleece layers</span></label>
         <label class="pack-item"><input type="checkbox" data-pack="pk2"><span>Long pants × 3–4</span></label>
         <label class="pack-item"><input type="checkbox" data-pack="pk3"><span>Warm socks</span></label>
@@ -1681,8 +1692,8 @@
       </a>
     </div>
     <div class="card" style="padding:8px">
-      <iframe src="https://docs.google.com/spreadsheets/d/1HSxXDJ1D85xHB_bxp7EJnVEICunLw4QikU5hqoFj45A/preview"
-              style="width:100%;height:640px;border:0;border-radius:8px;background:#f2f2f2"
+      <div class="sheet-tools"><button id="sheet-theme" class="sheet-toggle" type="button">🌙 Dark sheet</button></div>
+      <iframe id="sheet-frame" src="https://docs.google.com/spreadsheets/d/1HSxXDJ1D85xHB_bxp7EJnVEICunLw4QikU5hqoFj45A/preview"
               title="Trip spreadsheet preview"></iframe>
     </div>
   </section>
@@ -1727,6 +1738,20 @@
       try { localStorage.setItem("pack:" + cb.dataset.pack, cb.checked ? "1" : "0"); } catch(e) {}
     });
   });
+  // Spreadsheet dark-mode toggle (persisted)
+  var st = document.getElementById("sheet-theme"), sf = document.getElementById("sheet-frame");
+  function paintSheetBtn(){ if (st) st.textContent = sf.classList.contains("dark") ? "☀️ Light sheet" : "🌙 Dark sheet"; }
+  if (sf) {
+    var sheetDark = true;
+    try { sheetDark = localStorage.getItem("sheetDark") !== "0"; } catch (e) {}
+    if (sheetDark) sf.classList.add("dark");
+    paintSheetBtn();
+    if (st) st.addEventListener("click", function(){
+      var d = sf.classList.toggle("dark");
+      try { localStorage.setItem("sheetDark", d ? "1" : "0"); } catch (e) {}
+      paintSheetBtn();
+    });
+  }
   var pr = document.getElementById("pack-reset");
   if (pr) pr.addEventListener("click", function(e) {
     e.preventDefault();
@@ -1812,14 +1837,35 @@
     for (let d = 1; d <= dim; d++) {
       const dt = new Date(year, month, d), k = key(dt);
       let cls = "";
+      let dayAttr = "";
       if (flightDays.includes(k)) cls = "flight";
       else if (dt >= tripStart && dt <= tripEnd) cls = "trip";
-      html += `<span class="${cls}" data-date="${k}">${d}</span>`;
+      if (dt >= tripStart && dt <= tripEnd) {
+        dayAttr = ` data-day="${Math.round((dt - tripStart) / 864e5)}"`;
+        cls = (cls ? cls + " " : "") + "daylink";
+      }
+      html += `<span class="${cls}" data-date="${k}"${dayAttr}>${d}</span>`;
     }
     return html + `</div></div>`;
   }
   document.getElementById("calendars").innerHTML =
     monthGrid(2026, 10, "November") + monthGrid(2026, 11, "December");
+
+  // Calendar date -> itinerary day deep link
+  document.getElementById("calendars").addEventListener("click", function(e) {
+    const sp = e.target.closest("span.daylink");
+    if (!sp) return;
+    const i = +sp.dataset.day;
+    showTab("itinerary");
+    const card = host.children[i];
+    if (!card) { window.scrollTo({top: 0, behavior: "smooth"}); return; }
+    card.classList.add("expanded");
+    const btn = card.querySelector(".day-head");
+    if (btn) btn.setAttribute("aria-expanded", "true");
+    try { localStorage.setItem("dayexp:" + i, "1"); } catch (err) {}
+    card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+    setTimeout(function(){ card.scrollIntoView({behavior: "smooth", block: "center"}); }, 60);
+  });
 
   // Live weather (Open-Meteo, no key needed) — refreshes on every visit
   const CITIES = {
@@ -1839,13 +1885,14 @@
     return "🌡️";
   }
   const WDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const TYPICAL = { seoul: [8, -1], tokyo: [14, 6] }; // typical [hi, lo] °C for the trip dates
+  const TYPICAL = { seoul: [46, 30], tokyo: [57, 43] }; // typical [hi, lo] °F for the trip dates
   async function loadWeather() {
     for (const ck of Object.keys(CITIES)) {
       const c = CITIES[ck], el = document.getElementById(c.el);
       try {
         const u = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}` +
           `&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min` +
+          `&temperature_unit=fahrenheit` +
           `&timezone=${encodeURIComponent(c.tz)}&forecast_days=16`;
         const j = await (await fetch(u)).json();
         c.fc = {};
@@ -1861,7 +1908,7 @@
         }).join("");
         const upd = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
         el.innerHTML = `<div class="wx-head"><b>${c.name}</b><span class="wx-upd">updated ${upd}</span></div>
-          <div class="wx-now"><span class="wx-temp">${wmoji(j.current.weather_code)} ${now}°C</span><span class="wx-hilo">today ${today.hi}° / ${today.lo}°</span></div>
+          <div class="wx-now"><span class="wx-temp">${wmoji(j.current.weather_code)} ${now}°F</span><span class="wx-hilo">today ${today.hi}° / ${today.lo}°</span></div>
           <div class="wx-scroll">${week}</div>`;
       } catch (e) {
         el.innerHTML = `<div class="wx-head"><b>${c.name}</b></div><div class="wx-err">Couldn't load right now — check back later.</div>`;
