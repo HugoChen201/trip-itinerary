@@ -46,14 +46,18 @@
   }
   .tab {
     border: none; background: none; cursor: pointer;
-    font-size: .95rem; font-weight: 600; color: var(--muted);
-    padding: 10px 12px; border-bottom: 3px solid transparent;
+    font-size: .8rem; font-weight: 600; color: var(--muted);
+    padding: 8px 8px; border-bottom: 3px solid transparent;
     margin-bottom: -2px;
-    display: inline-flex; align-items: center; gap: 7px;
+    display: inline-flex; align-items: center; gap: 6px;
     white-space: nowrap; line-height: 1.4;
   }
+  .tabs.has-more {
+    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+    mask-image: linear-gradient(to right, #000 88%, transparent);
+  }
   @media (max-width: 640px) {
-    .tab { font-size: .85rem; padding: 8px 8px; gap: 5px; }
+    .tab { font-size: .8rem; padding: 8px 7px; gap: 5px; }
   }
   .tab:hover { color: var(--ink); }
   .tab.active { color: var(--accent-dark); border-bottom-color: var(--accent); }
@@ -1865,6 +1869,18 @@
     card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
     setTimeout(function(){ card.scrollIntoView({behavior: "smooth", block: "center"}); }, 60);
   });
+
+  // Subtle fade hint when tabs overflow the (scrollbar-free) tab bar
+  function tabOverflowHint(){
+    const bar = document.querySelector(".tabs");
+    if (!bar) return;
+    bar.classList.toggle("has-more",
+      bar.scrollWidth > bar.clientWidth + 2 &&
+      bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 2);
+  }
+  window.addEventListener("resize", tabOverflowHint);
+  document.querySelector(".tabs").addEventListener("scroll", tabOverflowHint, {passive:true});
+  tabOverflowHint();
 
   // Live weather (Open-Meteo, no key needed) — refreshes on every visit
   const CITIES = {
