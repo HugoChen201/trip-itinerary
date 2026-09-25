@@ -118,26 +118,47 @@
 
   .tips li { margin-bottom: 8px; }
 
-  /* Itinerary layout + weather sidebar */
-  .itin-layout { display: grid; gap: 20px; }
-  @media (min-width: 880px) {
-    .itin-layout { grid-template-columns: 1fr 290px; align-items: start; }
-    .weather-side { position: sticky; top: 16px; }
-  }
-  .weather-side h2 { margin-top: 0; }
+  /* Weather strip (top of Itinerary — compact, mobile-first) */
+  .wx-strip { display: grid; gap: 14px; margin-bottom: 14px; }
+  @media (min-width: 640px) { .wx-strip { grid-template-columns: 1fr 1fr; } }
+  .wx-strip .card { margin-bottom: 0; }
   .wx-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 1rem; }
   .wx-upd { font-size: .7rem; color: var(--muted); font-weight: 600; }
-  .wx-now { margin: 6px 0 2px; }
-  .wx-temp { font-size: 2rem; font-weight: 800; }
-  .wx-days { display: flex; flex-direction: column; gap: 3px; margin-top: 10px; }
-  .wx-row { display: flex; align-items: center; gap: 10px; background: var(--bg); border-radius: 8px; padding: 5px 12px; font-size: .85rem; }
-  .wx-row .wx-d { color: var(--muted); font-weight: 600; flex: 1; white-space: nowrap; }
-  .wx-row .wx-d i { font-style: normal; font-weight: 400; opacity: .7; }
-  .wx-row b { font-size: 1.05rem; }
-  .wx-row .wx-t { color: var(--muted); margin-left: auto; white-space: nowrap; }
-  .wx-row .hi { color: var(--ink); font-weight: 700; }
+  .wx-now { margin: 6px 0 2px; display: flex; align-items: baseline; gap: 10px; }
+  .wx-temp { font-size: 1.7rem; font-weight: 800; }
+  .wx-hilo { color: var(--muted); font-size: .9rem; font-weight: 600; }
+  .wx-scroll { display: flex; gap: 8px; overflow-x: auto; margin-top: 10px; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .wx-cell { flex: 0 0 auto; min-width: 60px; text-align: center; background: var(--bg); border-radius: 10px; padding: 8px 10px; font-size: .78rem; }
+  .wx-cell .wd { display: block; font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .wx-cell b { display: block; font-size: 1.25rem; margin: 2px 0; }
+  .wx-cell .wt { color: var(--muted); white-space: nowrap; }
+  .wx-cell .hi { color: var(--ink); font-weight: 700; }
   .wx-err { color: var(--muted); font-size: .9rem; margin-top: 6px; }
-  .wx-note { font-size: .75rem; color: var(--muted); text-align: center; }
+  .wx-note { font-size: .75rem; color: var(--muted); }
+
+  /* Expandable day cards */
+  .day { display: block; }
+  .day-head {
+    display: flex; gap: 16px; align-items: flex-start; width: 100%;
+    background: none; border: none; padding: 0; margin: 0;
+    font: inherit; color: inherit; text-align: left; cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+  }
+  .day-head.static { cursor: default; }
+  .day-head .chev {
+    margin-left: auto; flex: 0 0 auto; align-self: center;
+    color: var(--muted); font-size: 1.1rem; transition: transform .2s;
+  }
+  .day.expanded .day-head .chev { transform: rotate(180deg); }
+  .day-body { display: none; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .day.expanded .day-body { display: block; }
+  .day-body ul { margin: 0; padding-left: 20px; }
+  .day-body li { margin-bottom: 6px; }
+  .day-body .mapline { margin-top: 10px; }
+
+  /* Wide tables scroll horizontally on small screens */
+  .tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
 
   /* Calendar weather badges */
   .wx-badge { display: block; font-size: .62rem; font-weight: 700; color: var(--muted); margin-top: 3px; line-height: 1.3; }
@@ -241,27 +262,21 @@
   <!-- ITINERARY -->
   <section class="tabpane active" id="pane-itinerary">
     <h2>Day by day</h2>
-    <div class="itin-layout">
-      <div class="itin-main">
-        <div id="days"></div>
-        <h2>💡 Tips</h2>
-        <div class="card">
-          <ul class="tips">
-            <li>The outbound flight leaves at 12:30 AM Monday — be at JFK on <b>Sunday night, Nov 22</b>.</li>
-            <li>Chase points were showing 126,813 pts (1¢/pt). With the 1.25x portal boost it should be ~101k points — check the points price in your cart before paying.</li>
-            <li>The return leaves Haneda at 1:30 AM with a stop in Seoul — an early start and a long travel day.</li>
-          </ul>
-        </div>
-      </div>
-      <aside class="weather-side">
-        <h2>🌤️ Weather</h2>
-        <div class="card wx" id="wx-seoul"><b>Seoul</b><div class="wx-err">Loading…</div></div>
-        <div class="card wx" id="wx-tokyo"><b>Tokyo</b><div class="wx-err">Loading…</div></div>
-        <div class="wx-note">Live forecast · refreshes every visit</div>
-      </aside>
+    <div class="wx-strip">
+      <div class="card wx" id="wx-seoul"><b>Seoul</b><div class="wx-err">Loading…</div></div>
+      <div class="card wx" id="wx-tokyo"><b>Tokyo</b><div class="wx-err">Loading…</div></div>
+    </div>
+    <div class="wx-note" style="margin:-4px 0 18px">🌤️ Live forecast · refreshes every visit</div>
+    <div id="days"></div>
+    <h2>💡 Tips</h2>
+    <div class="card">
+      <ul class="tips">
+        <li>The outbound flight leaves at 12:30 AM Monday — be at JFK on <b>Sunday night, Nov 22</b>.</li>
+        <li>✅ Flights are booked — Chase Travel Trip #1029873864, airline conf <b>AQ3H2X</b>. Seats aren't included; contact Asiana / Korean Air directly for seat assignments.</li>
+        <li>The return leaves Haneda at 1:30 AM with a stop in Seoul — an early start and a long travel day.</li>
+      </ul>
     </div>
   </section>
-
   <!-- CALENDAR -->
   <section class="tabpane" id="pane-calendar">
     <h2>Trip calendar</h2>
@@ -1602,6 +1617,7 @@
       <div class="card bstat"><span class="blabel">Per person</span><span class="bval">$1,268.13+</span><span class="bsub">the number that decides the +1</span></div>
     </div>
     <div class="card">
+      <div class="tscroll">
       <table class="btable">
         <tr><th>Category</th><th>Item</th><th>Per person</th><th>× 3</th></tr>
         <tr><td>Flights</td><td>Multi-city JFK→ICN→HND→JFK ✅</td><td>$1,268.13</td><td>$3,804.39</td></tr>
@@ -1612,6 +1628,7 @@
         <tr><td>Connectivity</td><td>eSIM</td><td>—</td><td>—</td></tr>
         <tr><td>Misc</td><td>Souvenirs, buffer</td><td>—</td><td>—</td></tr>
       </table>
+      </div>
       <p class="fine">Hotels are TBD — Hugo's researching them himself; the spreadsheet's Hotels tab keeps the earlier finds as reference. Tip: filter for "triple room" / "family room" — one room split 3 ways is the cheapest per-person setup. Agoda is strong for Asia bookings.</p>
     </div>
   </section>
@@ -1735,36 +1752,53 @@
   }
   tick(); setInterval(tick, 60000);
 
-  // Itinerary days (last field: Google Maps route link, "" = none yet)
+  // Itinerary days: [weekday, date, month, city, summary, isFlight, mapLink, detail bullets[]]
   const days = [
-    ["Mon","23","Nov","Seoul","✈️ Fly JFK → ICN (arrives Tue 6:10 AM). Settle in.", true, ""],
-    ["Tue","24","Nov","Seoul","", false, ""],
-    ["Wed","25","Nov","Seoul","", false, ""],
-    ["Thu","26","Nov","Seoul","", false, ""],
-    ["Fri","27","Nov","Tokyo","✈️ Via Incheon: fly ICN → HND (8:40 PM → 10:50 PM). Be at ICN 5:30–6 PM.", true, ""],
-    ["Sat","28","Nov","Tokyo","", false, ""],
-    ["Sun","29","Nov","Tokyo","", false, ""],
-    ["Mon","30","Nov","Tokyo","", false, ""],
-    ["Tue","1","Dec","Tokyo","", false, ""],
-    ["Wed","2","Dec","Tokyo","", false, ""],
-    ["Thu","3","Dec","Tokyo","", false, ""],
-    ["Fri","4","Dec","Tokyo","Last night — pack for the 1:30 AM flight.", false, ""],
-    ["Sat","5","Dec","Home","✈️ Fly HND → JFK via ICN (arrives 9:00 AM).", true, ""],
+    ["Mon","23","Nov","Seoul","✈️ Departure day — JFK 12:30 AM (night of Sun Nov 22).", true, "", ["Asiana OZ223 nonstop · 15h 40m","Arrive ICN Tue 6:10 AM"]],
+    ["Tue","24","Nov","Seoul","Arrive + recover — easy first day around Myeongdong.", false, "", ["Land ICN 6:10 AM — transfer to hotel","Rest up from the red-eye","Myeongdong street food at night"]],
+    ["Wed","25","Nov","Seoul","Palace day — Gyeongbokgung, Bukchon, Insadong.", false, "", ["Gyeongbokgung Palace + hanbok rental (free entry in hanbok)","Bukchon Hanok Village — go early to beat crowds","Insadong tea houses"]],
+    ["Thu","26","Nov","Seoul","Shopping day — Hongdae, Myeongdong, Dongdaemun.", false, "", ["Hongdae: indie shops + street food by day, nightlife after dark","Myeongdong / Dongdaemun late-night shopping"]],
+    ["Fri","27","Nov","Tokyo","✈️ Incheon sightseeing, then fly ICN → HND.", true, "", ["Incheon: Chinatown, Fairytale Village, Sinpo Market","Be at ICN 5:30–6 PM","Korean Air KE751 · 8:40 PM → 10:50 PM"]],
+    ["Sat","28","Nov","Tokyo","Open Tokyo day.", false, "", []],
+    ["Sun","29","Nov","Tokyo","Asakusa, Skytree, Tokyo Dome lights.", false, "", ["Asakusa + Tokyo Skytree","Tokyo Dome winter illumination"]],
+    ["Mon","30","Nov","Tokyo","Ginkgo avenue, Shibuya, Shinjuku.", false, "", ["Jingu Gaien ginkgo avenue — peak foliage","Shibuya + Shinjuku"]],
+    ["Tue","1","Dec","Tokyo","Ueno, Akihabara, Rikugien illumination.", false, "", ["Ueno + Akihabara","Rikugien Garden night illumination (Nov 25 – Dec 6)"]],
+    ["Wed","2","Dec","Tokyo","Day trip: Kamakura + Enoshima.", false, "", ["Great Buddha + Hase temples","Enoshima island — stay for evening illuminations"]],
+    ["Thu","3","Dec","Tokyo","Day trip: Hakone or Yokohama.", false, "", ["Hakone: Fuji views + onsen, or","Yokohama: harbor lights + Chinatown dinner"]],
+    ["Fri","4","Dec","Tokyo","teamLab, Roppongi, Shiba Park — then Haneda.", false, "", ["teamLab (book weeks ahead)","Roppongi Hills + Shiba Park market","Head to Haneda for the 1:30 AM flight"]],
+    ["Sat","5","Dec","Home","✈️ Fly HND → JFK via ICN (arrives 9:00 AM).", true, "", ["Asiana OZ177 + OZ222 · 1:30 AM → 9:00 AM"]],
   ];
   const host = document.getElementById("days");
-  days.forEach(([wd, num, mo, city, note, isFlight, map], i) => {
+  days.forEach(([wd, num, mo, city, note, isFlight, map, details], i) => {
     const div = document.createElement("div");
     div.className = "card day";
+    const hasDetails = (details && details.length > 0) || !!map;
+    let open = false;
+    try { open = hasDetails && localStorage.getItem("dayexp:" + i) === "1"; } catch (e) {}
+    if (open) div.classList.add("expanded");
     div.innerHTML = `
-      <div class="daynum">DAY ${i + 1}<b>${num}</b>${wd}</div>
-      <div class="plan">
-        <div class="city">${city}${isFlight ? '<span class="pill">✈️ travel day</span>' : ''}</div>
-        <div class="note">${note || "— add plans —"}</div>
+      <button class="day-head${hasDetails ? "" : " static"}"${hasDetails ? ` aria-expanded="${open}"` : ""}>
+        <div class="daynum">DAY ${i + 1}<b>${num}</b>${wd}</div>
+        <div class="plan">
+          <div class="city">${city}${isFlight ? '<span class="pill">✈️ travel day</span>' : ''}</div>
+          <div class="note">${note || "— add plans —"}</div>
+        </div>
+        ${hasDetails ? '<span class="chev">▾</span>' : ""}
+      </button>
+      ${hasDetails ? `<div class="day-body">
+        <ul>${details.map(d => `<li>${d}</li>`).join("")}</ul>
         ${map ? `<div class="mapline">🗺️ <a href="${map}" target="_blank" rel="noopener">Route map ↗</a></div>` : ""}
-      </div>`;
+      </div>` : ""}`;
+    if (hasDetails) {
+      const btn = div.querySelector(".day-head");
+      btn.addEventListener("click", () => {
+        const now = div.classList.toggle("expanded");
+        btn.setAttribute("aria-expanded", now);
+        try { localStorage.setItem("dayexp:" + i, now ? "1" : "0"); } catch (e) {}
+      });
+    }
     host.appendChild(div);
   });
-
   // Calendar view: Nov & Dec 2026, trip range Nov 23 – Dec 5 highlighted
   const tripStart = new Date(2026, 10, 23), tripEnd = new Date(2026, 11, 5);
   const flightDays = ["2026-11-23", "2026-11-27", "2026-12-05"];
@@ -1819,15 +1853,16 @@
           c.fc[t] = { code: j.daily.weather_code[i], hi: Math.round(j.daily.temperature_2m_max[i]), lo: Math.round(j.daily.temperature_2m_min[i]) };
         });
         const now = Math.round(j.current.temperature_2m);
+        const today = c.fc[j.daily.time[0]];
         const week = j.daily.time.slice(0, 7).map(t => {
           const [Y, M, D] = t.split("-").map(Number);
           const f = c.fc[t];
-          return `<div class="wx-row"><span class="wx-d">${WDAYS[new Date(Y, M - 1, D).getDay()]} <i>${M}/${D}</i></span><b>${wmoji(f.code)}</b><span class="wx-t"><span class="hi">${f.hi}°</span>/${f.lo}°</span></div>`;
+          return `<div class="wx-cell"><span class="wd">${WDAYS[new Date(Y, M - 1, D).getDay()]} ${M}/${D}</span><b>${wmoji(f.code)}</b><span class="wt"><span class="hi">${f.hi}°</span>/${f.lo}°</span></div>`;
         }).join("");
         const upd = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
         el.innerHTML = `<div class="wx-head"><b>${c.name}</b><span class="wx-upd">updated ${upd}</span></div>
-          <div class="wx-now"><span class="wx-temp">${wmoji(j.current.weather_code)} ${now}°C</span></div>
-          <div class="wx-days">${week}</div>`;
+          <div class="wx-now"><span class="wx-temp">${wmoji(j.current.weather_code)} ${now}°C</span><span class="wx-hilo">today ${today.hi}° / ${today.lo}°</span></div>
+          <div class="wx-scroll">${week}</div>`;
       } catch (e) {
         el.innerHTML = `<div class="wx-head"><b>${c.name}</b></div><div class="wx-err">Couldn't load right now — check back later.</div>`;
       }
