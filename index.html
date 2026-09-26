@@ -1887,8 +1887,8 @@
     ["Wed","25","Nov","Seoul","🏯 Culture day — 👘 hanbok + Gyeongbokgung morning, 🪩 Hongdae nightlife.", false, "", ["9:00 AM|👘 Hanbok rental near Gyeongbokgung (thermals underneath)","10:00 AM|🏯 Gyeongbokgung — guard-changing ceremony + palace photos","Late morning|🏘️ Bukchon Hanok Village in hanbok","Midday|👕 Return hanbok, lunch (TBD)","Afternoon|🗺️ Flexible — Changdeokgung grounds, Ikseon-dong, or Insadong (decide day-of)","Evening|🏨 Back to hotel, rest + recharge","Night|🪩 Hongdae — pocha/bar-hop, then club ~1 AM (bring passport)"]],
     ["Thu","26","Nov","Seoul","😴 Recovery day — sleep in, spontaneous shopping, 🧖 jjimjilbang + 🎤 noraebang night.", false, "", ["Morning|😴 Sleep in — optional 🥾 Bukhansan hike if feeling good (morning-of call, wake ~7:30 AM for 9:30 trailhead)","Daytime|🛍️ Spontaneous shopping — Myeongdong, Hongdae, Dongdaemun…","Evening|🧖 Jjimjilbang — Dragon Hill Spa (24h, foreigner-friendly)","Night|🎤 Noraebang — private-room karaoke"]],
     ["Fri","27","Nov","Tokyo","✈️ Incheon day — 🛍️ shopping + sightseeing, fly ICN → HND, 🌙 manga kissa night.", true, "", ["11:00 AM|🧳 Check out Seoul hotel → AREX to ICN (~1 hr)","12:30 PM|🎒 Bags in ICN left-luggage, head out","Option A|🏮 Old-town cluster — Chinatown + Fairytale Village + Sinpo Market","Option B|🌆 Modern Songdo — Central Park, observatory, mall","5:30 PM|↩️ Back to ICN, collect bags","6:30 PM|✈️ At airport — KE751 · 8:40 PM → 10:50 PM","10:50 PM|🛬 Land HND (~11:30 PM out)","Night|💻 Manga kissa (internet cafe) overnight — cheap late-arrival crash pad","💻|Kamata area (~10 min from HND on Keikyu — don't trek into central Tokyo, last trains ~midnight)","💻|Kaikatsu Club / Manboo — night pack ~¥2,000–3,500, private booth each, free drinks, showers","💻|First visit = quick membership signup — bring passports","💻|Backup: capsule hotel in Kamata ~¥3,000–5,000 (walk-ins OK)"]],
-    ["Sat","28","Nov","Osaka","🚄 Osaka — shinkansen in, 🏯 castle, 🌇 Umeda Sky sunset, Dotonbori night.", false, "", []],
-    ["Sun","29","Nov","Osaka","🍁 Kyoto foliage day trip.", false, "", []],
+    ["Sat","28","Nov","Osaka","🚄 Osaka — shinkansen in, 🏯 castle, 🌇 Umeda Sky sunset, Dotonbori night.", false, "", ["Morning|🚄 Shinkansen Tokyo → Osaka (~2.5 hrs, Nozomi reserved ~¥14,720)","Midday|🏨 Drop bags at hotel, lunch","Afternoon|🏯 Osaka Castle (2–3 hrs) + park foliage","Late PM|🏮 Shinsekai or Kuromon Market — kushikatsu, street snacks","Sunset|🌇 Umeda Sky Building — floating garden observatory","Night|🌃 Dotonbori — neon, street food, Shinsaibashi"]] ,
+    ["Sun","29","Nov","Osaka","🍁 Kyoto day trip — ⛩️ Fushimi Inari hike, Kiyomizu-dera, Gion night.", false, "", ["7:00 AM|🚇 Train Osaka → Kyoto (~1 hr)","8:00 AM|⛩️ Fushimi Inari — hike the torii gates (summit ~2–3 hrs round trip, or Yotsutsuji viewpoint ~45 min up)","Midday|🍜 Higashiyama — lunch, explore","Afternoon|🍁 Kiyomizu-dera — wooden stage, foliage, Sannenzaka/Ninenzaka streets","Evening|🏮 Gion / Pontocho Alley — dinner, old-Kyoto streets","Night|🚇 Train back to Osaka — Dotonbori round 2 if legs allow"]] ,
     ["Mon","30","Nov","Hakone","♨️ Hakone — onsen ryokan (2 nights).", false, "", []],
     ["Tue","1","Dec","Hakone","♨️ Hakone — onsen, Fuji views.", false, "", []],
     ["Wed","2","Dec","Tokyo","🚄 Tokyo — from Hakone.", false, "", ["Great Buddha + Hase temples","Enoshima island — stay for evening illuminations"]],
@@ -1897,7 +1897,7 @@
     ["Sat","5","Dec","Home","✈️ Fly HND → JFK via ICN (arrives 9:00 AM).", true, "", ["Asiana OZ177 + OZ222 · 1:30 AM → 9:00 AM"]],
   ];
   const host = document.getElementById("days");
-  const FINALIZED_DAYS = new Set([1, 2, 3]); // day indexes with confirmed plans get expandable details
+  const FINALIZED_DAYS = new Set([1, 2, 3, 5, 6]); // day indexes with confirmed plans get expandable details
   days.forEach(([wd, num, mo, city, note, isFlight, map, details], i) => {
     const div = document.createElement("div");
     div.className = "card day";
