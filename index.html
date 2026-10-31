@@ -187,6 +187,7 @@
   /* Map links on day cards */
   .mapline { margin-top: 8px; font-size: .9rem; }
   .mapline a { color: var(--accent-dark); font-weight: 700; text-decoration: none; }
+  .mapchip { text-decoration: none; font-size: .95em; padding: 0 2px; }
   .mapline a:hover { text-decoration: underline; }
 
   /* Recommendations */
@@ -1909,7 +1910,12 @@
         const isTL = details.length && details.every(d => d.includes("|"));
         const lis = details.map(d => {
           const p = d.indexOf("|");
-          return (isTL && p > -1) ? `<li><span class="tt">${d.slice(0, p)}</span><span>${d.slice(p + 1)}</span></li>` : `<li>${d}</li>`;
+          if (!(isTL && p > -1)) return `<li>${d}</li>`;
+          let rest = d.slice(p + 1), url = "";
+          const q = rest.lastIndexOf("|");
+          if (q > -1 && /^https?:\/\//.test(rest.slice(q + 1))) { url = rest.slice(q + 1); rest = rest.slice(0, q); }
+          const chip = url ? ` <a class="mapchip" href="${url}" target="_blank" rel="noopener" title="Open in Maps">📍</a>` : "";
+          return `<li><span class="tt">${d.slice(0, p)}</span><span>${rest}${chip}</span></li>`;
         }).join("");
         return `<div class="day-body">
         <ul class="${isTL ? "tl" : ""}">${lis}</ul>
